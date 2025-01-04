@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    justify-content: right;
+    border-bottom-style: outset;
+    border-color: deeppink;
+}
+
+.icon {
+    margin-right: 100px;
+    width: 50px;
+    cursor: pointer;
+}
