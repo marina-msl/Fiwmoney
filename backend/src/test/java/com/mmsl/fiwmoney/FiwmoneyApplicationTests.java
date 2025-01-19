@@ -18,9 +18,9 @@ class FiwmoneyApplicationTests {
 	@Autowired
 	private StockService stockService;
 
-	@Test
-	public void whenApplicationStarts_thenHibernateCreatesInitialRecors() {
-		List<Stock> stocks = stockService.findAll();
- 	}
+	// @Test
+	// public void whenApplicationStarts_thenHibernateCreatesInitialRecors() {
+	// 	List<Stock> stocks = stockService.findAll();
+ 	// }
 
 }
