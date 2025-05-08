@@ -20,9 +20,16 @@ function Stocks() {
             alert("Please fill all fields!");
             return;
         }
-        setStockTableData([...stockTableData, stockFormData]);
+        // setStockTableData([...stockTableData, stockFormData]);
         setStockFormData({ code: '', averagePrice: '' });
         fetch('http://www.localhost:8090/stocks/ ' + stockFormData.code)
+        .then(response => response.json())
+        .then(data => {
+            setStockTableData(data); 
+            alert(data);
+            console.log(data);
+        })
+        .catch((error) => console.log(error));
     };
 
     return (
