@@ -2,7 +2,6 @@ package com.mmsl.fiwmoney.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +30,10 @@ public class StockController {
         double currentPrice = service.fetchCurrentPrice(code);
 
         StockResult stockResult = new StockResult(code, currentPrice, averagePrice);
+        service.save(stockResult);
 
        return ResponseEntity.ok()
        .header("X-Custom-Info", "Stock Data Response")
        .body(stockResult);
-    }
-
-    @GetMapping("/test")
-    public String testEndpoint() {
-        return "StockController is working!";
     }
 }

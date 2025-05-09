@@ -4,7 +4,7 @@ public class StockResultMin {
 
     private String code;
     private String currency;
-    private Double price;
+    private double price;
     private String shortName;
 
     public String getCode() {
@@ -19,10 +19,10 @@ public class StockResultMin {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     public String getShortName() {

@@ -1,5 +1,7 @@
 package com.mmsl.fiwmoney.model;
 
+import com.mmsl.fiwmoney.dto.StockResult;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -113,5 +115,14 @@ public class Stock {
         sb.append(", averagePrice=").append(averagePrice);
         sb.append('}');
         return sb.toString();
+    }
+
+    public static Stock to(StockResult stockResult) {
+       Stock stock = new Stock();
+       stock.setCode(stockResult.getCode());
+       stock.setCurrentPrice(stockResult.getCurrentPrice());
+       stock.setAveragePrice(stockResult.getAveragePrice());
+
+       return stock;
     }
 }

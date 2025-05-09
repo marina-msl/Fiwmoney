@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.mmsl.fiwmoney.dto.StockResult;
 import com.mmsl.fiwmoney.dto.StockResultMin;
 import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.repository.StockRepository;
@@ -24,22 +25,13 @@ public class StockService {
         return repository.findAll();
     }
 
-  //  public Stock findByCode(String code) {
-  //      return repository.findByCode(code);
-  //  }
-
-    public void save(String code) {
-        
-        // Stock stock = new Stock(code, currentAveragePrice, averagePrice);
-        // this.repository.save(stock);
-    }
-
     public double fetchCurrentPrice(String stockCode) {
         String url = "http://localhost:8090/stocks/" + stockCode;
-        //Stock response = restTemplate.getForObject(url, Stock.class);
         StockResultMin response = restTemplate.getForObject(url, StockResultMin.class);
-
         return response != null ? response.getPrice() : 0.0;
+    }
 
+    public void save(StockResult stockResult) {
+        repository.save(Stock.to(stockResult));
     }
 }
