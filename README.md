@@ -20,5 +20,11 @@ Clone the whole projet to your machine.
 
 
 
-### Next steps:
-- Implement insert in BD, with all the searchs for stocks
+### Next steps - some ideas, or not:
+- Handle with 500 error
+- What's gonna happening when it search the same code more then once ?
+- Frotend?
+- Checking the current price , how many times in a day? Or when?
+- Spring security and authentication?
+- BD no Docker?
+  
