@@ -27,4 +27,5 @@ Clone the whole projet to your machine.
 - Checking the current price , how many times in a day? Or when?
 - Spring security and authentication?
 - BD no Docker?
+- microservices - the search-api is gonna be separete from fiwmoney ?
   
