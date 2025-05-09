@@ -21,5 +21,4 @@ Clone the whole projet to your machine.
 
 
 ### Next steps:
-- Correct the fetchCurrentPrice method
-- Implement insert in BD all the searchs for stocks
+- Implement insert in BD, with all the searchs for stocks
