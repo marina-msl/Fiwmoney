@@ -17,3 +17,8 @@ Clone the whole projet to your machine.
 
 
 <img width="547" alt="image" src="https://github.com/user-attachments/assets/4b4e16f6-ab1d-4139-8098-5a19732d3c53" />
+
+
+
+### Next steps:
+- Implement insert in BD, with all the searchs for stocks
