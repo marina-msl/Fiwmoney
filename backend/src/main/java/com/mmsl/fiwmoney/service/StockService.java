@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.mmsl.fiwmoney.dto.StockResultMin;
 import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.repository.StockRepository;
 
@@ -35,8 +36,10 @@ public class StockService {
 
     public double fetchCurrentPrice(String stockCode) {
         String url = "http://localhost:8090/stocks/" + stockCode;
-        Stock response = restTemplate.getForObject(url, Stock.class);
-        return response != null ? response.getCurrentPrice() : 0.0;
+        //Stock response = restTemplate.getForObject(url, Stock.class);
+        StockResultMin response = restTemplate.getForObject(url, StockResultMin.class);
+
+        return response != null ? response.getPrice() : 0.0;
 
     }
 }

@@ -22,7 +22,6 @@ public class StockController {
     // @CrossOrigin(origins = "http://localhost:9000")
     @PostMapping(value = "/all")
     public ResponseEntity<StockResult> getStock(@RequestBody StockRequest stock) {
-        System.out.println("Estouuu  aqui MMM");
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
         }
