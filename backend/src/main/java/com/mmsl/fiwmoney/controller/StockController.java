@@ -12,14 +12,14 @@ import com.mmsl.fiwmoney.dto.StockResult;
 import com.mmsl.fiwmoney.service.StockService;
 
 @RestController
-@RequestMapping(value = "stock")
+@RequestMapping(value = "/")
 public class StockController {
     
     @Autowired
     private StockService service;
 
     // @CrossOrigin(origins = "http://localhost:9000")
-    @PostMapping(value = "/all")
+    @PostMapping(value = "/stock")
     public ResponseEntity<StockResult> getStock(@RequestBody StockRequest stock) {
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
