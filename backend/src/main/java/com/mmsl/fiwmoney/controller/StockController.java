@@ -29,6 +29,10 @@ public class StockController {
         double averagePrice = stock.getAveragePrice();
         double currentPrice = service.fetchCurrentPrice(code);
 
+        if (currentPrice == -1) {
+            return ResponseEntity.notFound().build();
+        }
+
         StockResult stockResult = new StockResult(code, currentPrice, averagePrice);
         service.save(stockResult);
 
