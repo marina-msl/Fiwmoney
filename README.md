@@ -21,11 +21,13 @@ Clone the whole projet to your machine.
 
 
 ### Next steps - some ideas, or not:
-- Handle with 500 error
 - What's gonna happening when it search the same code more then once ?
-- Frotend?
+- Frotend? Change to Vue Framework?
 - Checking the current price , how many times in a day? Or when?
 - Spring security and authentication?
 - BD no Docker?
+- Deploy with docker
+- Change to PostgreSQL
 - microservices - the search-api is gonna be separete from fiwmoney ?
+- send notifications or reports based on stock price changes.
   
