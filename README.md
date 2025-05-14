@@ -23,7 +23,6 @@ Clone the whole projet to your machine.
 ### Next steps - some ideas, or not:
 - What's gonna happening when it search the same code more then once ?
 - Frotend? Change to Vue Framework?
-- Checking the current price , how many times in a day? Or when?
 - Spring security and authentication?
 - BD no Docker?
 - Deploy with docker
