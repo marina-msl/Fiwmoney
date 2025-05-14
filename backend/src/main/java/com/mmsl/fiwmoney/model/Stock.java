@@ -7,9 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tb_stock")
+@Table(name = "stocks", uniqueConstraints= @UniqueConstraint(columnNames="code"))
 public class Stock {
 
     @Id
