@@ -30,4 +30,4 @@ Clone the whole projet to your machine.
 - Change to PostgreSQL
 - microservices - the search-api is gonna be separete from fiwmoney ?
 - send notifications or reports based on stock price changes.
-  
+- Unity tests?
