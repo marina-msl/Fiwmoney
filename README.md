@@ -21,7 +21,6 @@ Clone the whole projet to your machine.
 
 
 ### Next steps - some ideas, or not:
-- What's gonna happening when it search the same code more then once ?
 - Frotend? Change to Vue Framework?
 - Spring security and authentication?
 - BD no Docker?
