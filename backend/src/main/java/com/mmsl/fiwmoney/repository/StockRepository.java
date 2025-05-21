@@ -8,8 +8,6 @@ import com.mmsl.fiwmoney.model.Stock;
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
-    
-
    // List<Stock> findByName(String name);
 
    // Optional<Stock> findById(Long id);
