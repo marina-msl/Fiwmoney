@@ -1,0 +1,37 @@
+
+services:
+  backend:
+    build: .
+    container_name: fiwmoney_backend
+    ports:
+     - "8090:8090"
+    depends_on:
+     - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fiwmoney_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+    networks:
+    - mynetwork
+
+  postgres:
+    image: postgres:latest
+    container_name: fiwmoneydb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fiwmoney_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
+volumes:
+  pgdata:
+  
