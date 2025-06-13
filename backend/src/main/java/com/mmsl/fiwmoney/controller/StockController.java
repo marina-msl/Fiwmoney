@@ -20,6 +20,8 @@ import com.mmsl.fiwmoney.service.StockService;
 @RequestMapping(value = "/")
 public class StockController {
     
+    private static final int NOT_FOUND = -1;
+    
     @Autowired
     private StockService service;
 
@@ -32,13 +34,14 @@ public class StockController {
 
         String code = stock.getCode();
         double averagePrice = stock.getAveragePrice();
+        boolean notify = stock.getNotify();
         double currentPrice = service.fetchCurrentPrice(code);
 
-        if (currentPrice == -1) {
+        if (currentPrice == NOT_FOUND) {
             return ResponseEntity.notFound().build();
         }
 
-        StockResult stockResult = new StockResult(code, currentPrice, averagePrice);
+        StockResult stockResult = new StockResult(code, currentPrice, averagePrice, notify);
         service.save(stockResult);
 
        return ResponseEntity.ok()

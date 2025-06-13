@@ -4,6 +4,7 @@ public class StockRequest {
 
     private String code;
     private double averagePrice;
+    private boolean notify;
 
     public String getCode() {
         return code;
@@ -11,5 +12,9 @@ public class StockRequest {
 
     public double getAveragePrice() {
         return averagePrice;
+    }
+
+    public boolean getNotify() {
+        return notify;
     }
 }

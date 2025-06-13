@@ -5,11 +5,13 @@ public class StockResult {
     private String code;
     private double currentPrice;
     private double averagePrice;
+    private boolean notify;
 
-    public StockResult(String code, double currentPrice, double averagePrice) {
+    public StockResult(String code, double currentPrice, double averagePrice, boolean notify) {
         this.code = code;
         this.currentPrice = currentPrice;
         this.averagePrice = averagePrice;
+        this.notify = notify;
     }
 
     public String getCode() {
@@ -22,5 +24,9 @@ public class StockResult {
 
     public double getAveragePrice() {
         return averagePrice;
+    }
+
+    public boolean getNotify() {
+        return notify;
     }
 }
