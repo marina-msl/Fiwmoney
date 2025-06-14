@@ -54,4 +54,11 @@ public class StockController {
 
         return stocks.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(stocks);
     }
+
+    @PostMapping("/notify")
+    public ResponseEntity<String> isNotify(@RequestBody StockRequest stock) {
+        service.updateNotify(stock.getCode(), stock.getNotify());
+
+        return ResponseEntity.ok("Notify status updated for: " + stock.getCode());
+    }
 }
