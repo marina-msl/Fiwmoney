@@ -12,6 +12,8 @@ import com.mmsl.fiwmoney.dto.StockResultMin;
 import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.repository.StockRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class StockService {
 
@@ -57,5 +59,10 @@ public class StockService {
 
     public void save(StockResult stockResult) {
         repository.save(Stock.to(stockResult));
+    }
+
+    @Transactional
+    public void updateNotify(String code, boolean notify) {
+        repository.updateNotify(code, notify);
     }
 }
