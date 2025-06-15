@@ -1,15 +1,15 @@
 # Fiwmoney
 
-- The application has been developed with React, CSS, Java Script e HTML in frontend and the backend is Java with its libraries and famoust framework, SpringBoot.
+- The application has been developed with Vue.js, CSS, Java Script and HTML in frontend and the backend is Java with its libraries and famoust framework, SpringBoot.
 - The application purpose is to expand my portifolio and also build an useful tool for myself. I am a super fan of investiments and I realized the need of having a application which could let me know when the stocks are cheapers then my average price (It's time to go shopping!).
 - Once this application is to just enrich my knowlege, feel free to make any sugestions, since the clean code and SOLID principles, tecnologies as possible and nice to use, or anything else!
 
 # Getting start with Fiwmoney
-The application has to differents dictories, backend and frotend.
+The application has two differents dictories, backend and frotend.
 
 Clone the whole projet to your machine.
 
-**Getting start with frontend:** initialize with: npm start.
+**Getting start with frontend:** To visit the frontend, [click here](https://github.com/marina-msl/Fiwmoney_frontend)
 
 **Getting start with backend:** initialize the aplication in the IDE of your choice.
 
@@ -21,11 +21,16 @@ Clone the whole projet to your machine.
 
 
 ### Next steps - some ideas, or not:
-- Frotend? Change to Vue Framework?
-- Spring security and authentication?
-- BD no Docker?
-- Deploy with docker
-- Change to PostgreSQL
-- microservices - the search-api is gonna be separete from fiwmoney ?
-- send notifications or reports based on stock price changes.
+- Spring security and authentication? with login ? How to make the relationship between stocks and user?
+- Deploy with docker or AWS?
+- send notifications or reports based on stock price changes!!
 - Unity tests?
+- working with threads to check the current price
+- change to Mongo DB?  
+  
+#### Done:
+ 
+- [X] Frotend? Change to Vue Framework?
+- [X] BD no Docker?
+- [X] Change to PostgreSQL
+- [X] microservices - the search-api is gonna be separete from fiwmoney ? (Now, yes, let's see the next steps)
