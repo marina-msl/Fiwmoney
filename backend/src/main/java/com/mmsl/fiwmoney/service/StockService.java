@@ -20,6 +20,7 @@ import jakarta.transaction.Transactional;
 public class StockService {
 
     private static final Logger log = LoggerFactory.getLogger(StockService.class);
+    private static final int ONE_HOUR = 3600000;
     private final StockRepository repository;
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -32,7 +33,7 @@ public class StockService {
         return repository.findAll();
     }
 
-    @Scheduled(fixedRate=3600000)
+    @Scheduled(fixedRate=ONE_HOUR)
     public void updateStockPrices() {
         List<Stock> stocks = repository.findAll();
 
