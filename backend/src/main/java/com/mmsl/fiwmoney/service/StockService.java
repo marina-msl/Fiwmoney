@@ -2,6 +2,8 @@ package com.mmsl.fiwmoney.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -17,6 +19,7 @@ import jakarta.transaction.Transactional;
 @Service
 public class StockService {
 
+    private static final Logger log = LoggerFactory.getLogger(StockService.class);
     private final StockRepository repository;
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -39,9 +42,9 @@ public class StockService {
             if (currentPrice != -1) {
                 stock.setCurrentPrice(currentPrice);
                 repository.save(stock);
-                System.out.println("Update price for: " + stock.getCode());
+                log.info("Updating price for : " + stock.getCode());
             } else {
-                System.out.println("Stock not found: " + stock.getCode());
+                log.info("Stock not found: " + stock.getCode());
             }
         }
     }
