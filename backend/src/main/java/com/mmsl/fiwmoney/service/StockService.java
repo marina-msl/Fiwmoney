@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -22,8 +26,26 @@ public class StockService {
     private static final Logger log = LoggerFactory.getLogger(StockService.class);
     private static final int ONE_HOUR = 3600000;
     private final StockRepository repository;
+    private boolean send = true;
+
+    @Autowired
+    private JavaMailSender mailSender;
+    @Autowired
+    private SimpleMailMessage templateMessage;
 
     private final RestTemplate restTemplate = new RestTemplate();
+    
+    public void sendSimpleMessge(Stock stock) {
+        try {
+            SimpleMailMessage msg = new SimpleMailMessage(templateMessage);
+            msg.setTo("marina.msleide@gmail.com");
+            msg.setText("Stocks with lower prices: " + stock.getCode());
+            this.mailSender.send(msg);
+            log.info("Email was sent!");
+        } catch (MailException ex) {
+            log.error("Error: " + ex);
+        }
+    }
 
     public StockService(StockRepository repository) {
         this.repository = repository;
@@ -33,7 +55,8 @@ public class StockService {
         return repository.findAll();
     }
 
-    @Scheduled(fixedRate=ONE_HOUR)
+    // @Scheduled(fixedRate=ONE_HOUR)
+    @Scheduled(fixedRate=5000)
     public void updateStockPrices() {
         List<Stock> stocks = repository.findAll();
 
@@ -43,6 +66,11 @@ public class StockService {
             if (currentPrice != -1) {
                 stock.setCurrentPrice(currentPrice);
                 repository.save(stock);
+                if (send) {
+                    sendSimpleMessge(stock);
+                    send = false;
+                }
+            
                 log.info("Updating price for : " + stock.getCode());
             } else {
                 log.info("Stock not found: " + stock.getCode());
