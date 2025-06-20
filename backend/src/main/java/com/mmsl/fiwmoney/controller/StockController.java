@@ -24,7 +24,6 @@ public class StockController {
     @Autowired
     private StockService service;
 
-    // @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping(value = "/stock")
     public ResponseEntity<StockResult> getStock(@RequestBody StockRequest stock) {
         if (stock.getCode() == null) {
