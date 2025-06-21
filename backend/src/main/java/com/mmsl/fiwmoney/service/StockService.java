@@ -26,7 +26,6 @@ public class StockService {
     private static final Logger log = LoggerFactory.getLogger(StockService.class);
     private static final int ONE_HOUR = 3600000;
     private final StockRepository repository;
-    private boolean send = true;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -55,8 +54,19 @@ public class StockService {
         return repository.findAll();
     }
 
-    // @Scheduled(fixedRate=ONE_HOUR)
     @Scheduled(fixedRate=5000)
+    public void sendMessage() {
+        List<Stock> stocks = repository.findAll();
+
+        for (Stock stock : stocks) {
+            if (stock.getAveragePrice() > stock.getCurrentPrice()) {
+                sendSimpleMessge(stock);
+            }
+        }
+    }
+
+    @Scheduled(fixedRate=ONE_HOUR)
+    // @Scheduled(fixedRate=5000)
     public void updateStockPrices() {
         List<Stock> stocks = repository.findAll();
 
@@ -66,11 +76,6 @@ public class StockService {
             if (currentPrice != -1) {
                 stock.setCurrentPrice(currentPrice);
                 repository.save(stock);
-                if (send) {
-                    sendSimpleMessge(stock);
-                    send = false;
-                }
-            
                 log.info("Updating price for : " + stock.getCode());
             } else {
                 log.info("Stock not found: " + stock.getCode());
