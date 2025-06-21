@@ -13,6 +13,8 @@ Clone the whole projet to your machine.
 
 **Getting start with backend:** initialize the aplication in the IDE of your choice.
 
+**This project use an API to check the stock's prices:** to check the API, [click here](https://github.com/marina-msl/search-stock-api)
+
 # Sequence Diagram
 
 
