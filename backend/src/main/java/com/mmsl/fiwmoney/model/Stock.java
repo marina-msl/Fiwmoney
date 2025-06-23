@@ -34,10 +34,6 @@ public class Stock {
         this.notify = notify;
     }
 
-    // public void setId(Long id) {
-    //     this.id = id;
-    // }
-
     public void setCode(String code) {
         this.code = code;
     }
@@ -119,7 +115,6 @@ public class Stock {
             return false;
         return true;
     }
-
 
     public static Stock to(StockResult stockResult) {
        Stock stock = new Stock();
