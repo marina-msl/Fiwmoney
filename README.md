@@ -1,8 +1,8 @@
 # Fiwmoney
 
 - The application has been developed with Vue.js, CSS, Java Script and HTML in frontend and the backend is Java with its libraries and famoust framework, SpringBoot.
-- The application purpose is to expand my portifolio and also build an useful tool for myself. I am a super fan of investiments and I realized the need of having a application which could let me know when the stocks are cheapers then my average price (It's time to go shopping!).
-- Once this application is to just enrich my knowlege, feel free to make any sugestions, since the clean code and SOLID principles, tecnologies as possible and nice to use, or anything else!
+- The application purpose is to expand my portifolio and also build an useful tool for myself. I'm a big fan of investiments and I realized the need of having a application which could let me know when the stocks are cheapers then my average price (It's time to go shopping!).
+- Once this application is to just enrich my knowlege, feel free to make any sugestions, since the clean code and SOLID principles, tecnologies or anything else!
 
 # Getting start with Fiwmoney
 The application has two differents dictories, backend and frotend.
@@ -12,6 +12,8 @@ Clone the whole projet to your machine.
 **Getting start with frontend:** To visit the frontend, [click here](https://github.com/marina-msl/Fiwmoney_frontend)
 
 **Getting start with backend:** initialize the aplication in the IDE of your choice.
+
+**This project use an API to check the stock's prices:** to check the API, [click here](https://github.com/marina-msl/search-stock-api)
 
 # Sequence Diagram
 
@@ -23,9 +25,7 @@ Clone the whole projet to your machine.
 ### Next steps - some ideas, or not:
 - Spring security and authentication? with login ? How to make the relationship between stocks and user?
 - Deploy with docker or AWS?
-- send notifications or reports based on stock price changes!!
 - Unity tests?
-- working with threads to check the current price
 - change to Mongo DB?  
   
 #### Done:
@@ -33,4 +33,7 @@ Clone the whole projet to your machine.
 - [X] Frotend? Change to Vue Framework?
 - [X] BD no Docker?
 - [X] Change to PostgreSQL
-- [X] microservices - the search-api is gonna be separete from fiwmoney ? (Now, yes, let's see the next steps)
+- [X] Microservices - the search-api is gonna be separete from fiwmoney ? (Now, yes, let's see the next steps)
+- [X] Send notifications or reports based on stock price changes!!
+- [X] Working with threads to check the current price
+ 
