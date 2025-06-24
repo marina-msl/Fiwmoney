@@ -23,10 +23,15 @@ Clone the whole projet to your machine.
 
 
 ### Next steps - some ideas, or not:
-- Spring security and authentication? with login ? How to make the relationship between stocks and user?
-- Deploy with docker or AWS?
-- Unity tests?
-- change to Mongo DB?  
+- [ ] Before thinking about authentication, I'm going to focus on CI/CD:
+    - Set up with git actions
+    - Implement some tests
+    - Handle deployment
+    - - [ ] Deploy with docker or AWS?
+    - - [ ] Unity tests?
+- [ ] Spring security and authentication? with login ? How to make the relationship between stocks and user?
+
+- [ ] change to Mongo DB?  
   
 #### Done:
  
