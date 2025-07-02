@@ -24,7 +24,7 @@ public class StockController {
     @Autowired
     private StockService service;
 
-    @PostMapping(value = "/stock")
+    @PostMapping(value = "/stocks")
     public ResponseEntity<StockResult> getStock(@RequestBody StockRequest stock) {
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
