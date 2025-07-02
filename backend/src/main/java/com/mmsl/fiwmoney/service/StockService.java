@@ -34,7 +34,7 @@ public class StockService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     
-    public void sendSimpleMessge(Stock stock) {
+    private void sendMessage(Stock stock) {
         try {
             SimpleMailMessage msg = new SimpleMailMessage(templateMessage);
             msg.setTo("marina.msleide@gmail.com");
@@ -54,13 +54,13 @@ public class StockService {
         return repository.findAll();
     }
 
-    @Scheduled(fixedRate=5000)
+    // @Scheduled(fixedRate=5000)
     public void sendMessage() {
         List<Stock> stocks = repository.findAll();
 
         for (Stock stock : stocks) {
             if (stock.getAveragePrice() > stock.getCurrentPrice()) {
-                sendSimpleMessge(stock);
+                sendMessage(stock);
             }
         }
     }
