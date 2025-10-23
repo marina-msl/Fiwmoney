@@ -1,6 +1,6 @@
 
 services:
-  backend:
+  backend_fiwmoney:
     build: .
     container_name: fiwmoney_backend
     ports:
