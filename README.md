@@ -29,7 +29,12 @@ Clone the whole projet to your machine.
     - Handle deployment
     - - [ ] Deploy with docker or AWS?
     - - [ ] Unity tests?
-- [ ] Spring security and authentication? with login ? How to make the relationship between stocks and user?
+- [ ] Spring security and JWT? In progress:
+        - [ ] Implement UserService, UserRepository, UserDTO
+        - [ ] Implement REST Controller to Register
+        - [ ] Implement REST Controller to Login
+        - [ ] Frontend is already sending the headers?
+            I
 
 - [ ] change to Mongo DB?  
   
@@ -41,4 +46,7 @@ Clone the whole projet to your machine.
 - [X] Microservices - the search-api is gonna be separete from fiwmoney ? (Now, yes, let's see the next steps)
 - [X] Send notifications or reports based on stock price changes!!
 - [X] Working with threads to check the current price
+- [X] Add dependencies JWT an Spring Security  (pom.xml)
+- [X] Implement JwtUtil, JwtFilter and Security Config
+- [X] Implement register and login in frontend 
  
