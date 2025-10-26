@@ -20,11 +20,13 @@ public class UserService {
 
 
     public Optional<User> registerUser(String username, String password, String name, String email, String tenantId) {
-        if (userRepository.existsByUsername(username)) {
-           return Optional.empty();
-        }
 
-        User user = new User();
+        if (existsByUsername(username)) {
+
+              return Optional.empty();
+        }    
+        
+        var user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setName(name);
@@ -32,5 +34,10 @@ public class UserService {
         user.setTenantId(tenantId);
 
         return Optional.of(userRepository.save(user));
+
+    }
+
+    private boolean existsByUsername(String username) {
+        return userRepository.findByUsername(username).isPresent();
     }
 }
