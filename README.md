@@ -1,6 +1,6 @@
 # Fiwmoney
 
-- The application has been developed with Vue.js, CSS, Java Script and HTML in frontend and the backend is Java with its libraries and famoust framework, SpringBoot.
+- The application has been developed with Vue.js, CSS, Java Script and HTML in frontend and the backend is Java, SpringBoot, Spring Security, Lombok etc.
 - The application purpose is to expand my portifolio and also build an useful tool for myself. I'm a big fan of investiments and I realized the need of having a application which could let me know when the stocks are cheapers then my average price (It's time to go shopping!).
 - Once this application is to just enrich my knowlege, feel free to make any sugestions, since the clean code and SOLID principles, tecnologies or anything else!
 
@@ -30,12 +30,9 @@ Clone the whole projet to your machine.
     - - [ ] Deploy with docker or AWS?
     - - [ ] Unity tests?
 - [ ] Spring security and JWT? In progress:
-        - [ ] Implement UserService, UserRepository, UserDTO
-        - [ ] Implement REST Controller to Register
         - [ ] Implement REST Controller to Login
         - [ ] Frontend is already sending the headers?
-            I
-
+            
 - [ ] change to Mongo DB?  
   
 #### Done:
@@ -48,5 +45,8 @@ Clone the whole projet to your machine.
 - [X] Working with threads to check the current price
 - [X] Add dependencies JWT an Spring Security  (pom.xml)
 - [X] Implement JwtUtil, JwtFilter and Security Config
-- [X] Implement register and login in frontend 
+- [X] Implement register and login in frontend
+- [X] Implement REST Controller to Register
+- [x] Implement UserService, UserRepository, UserDTO
+
  
