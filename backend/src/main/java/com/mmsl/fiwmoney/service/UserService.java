@@ -37,6 +37,14 @@ public class UserService {
 
     }
 
+    public boolean checkPassword(User user, String rawPassword) {
+        return passwordEncoder.matches(rawPassword, user.getPassword());
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     private boolean existsByUsername(String username) {
         return userRepository.findByUsername(username).isPresent();
     }

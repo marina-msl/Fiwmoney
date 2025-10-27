@@ -40,5 +40,23 @@ public class AuthController {
         
         return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, user.username()));
     }
-    
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDto user) { 
+        var userFound = userService.findByUsername(user.username());
+        
+        if (userFound.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Invalid username or password"));
+        }
+
+        if (!userService.checkPassword(userFound.get(), user.password())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Invalid username or password"));
+        }
+
+        String token = jwtUtil.generateToken(userFound.get().getUsername(), userFound.get().getTenantId());
+
+        return ResponseEntity.ok(new AuthResponse(token, userFound.get().getUsername()));
+    }
 }
