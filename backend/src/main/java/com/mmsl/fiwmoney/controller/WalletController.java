@@ -1,7 +1,5 @@
 package com.mmsl.fiwmoney.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,7 +12,6 @@ import com.mmsl.fiwmoney.dto.StockDTO;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResult;
 import com.mmsl.fiwmoney.dto.WalletDto;
-import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.service.StockService;
 import com.mmsl.fiwmoney.service.WalletService;
 
@@ -32,7 +29,7 @@ public class WalletController {
 
 
     @PostMapping(value = "/stocks")
-    public ResponseEntity<StockResult> getStock(@RequestBody StockRequest stock) {
+    public ResponseEntity<StockDTO> getStock(@RequestBody StockRequest stock) {
 
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
@@ -47,12 +44,12 @@ public class WalletController {
             return ResponseEntity.notFound().build();
         }
 
-        StockDTO stockResult = new StockDTO(code, currentPrice, averagePrice, notify);
-        service.save(stockResult);
+        StockDTO stockDTO = new StockDTO(code, currentPrice, averagePrice, notify);
+        service.save(stockDTO);
 
        return ResponseEntity.ok()
        .header("X-Custom-Info", "Stock Data Response")
-       .body(stockResult);
+       .body(stockDTO);
     }
 
     // @GetMapping(value = "/stocks")
