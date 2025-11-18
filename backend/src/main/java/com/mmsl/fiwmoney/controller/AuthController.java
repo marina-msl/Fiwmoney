@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mmsl.fiwmoney.dto.AuthResponse;
 import com.mmsl.fiwmoney.dto.UserDto;
+import com.mmsl.fiwmoney.infrastructure.JwtUtil;
 import com.mmsl.fiwmoney.service.UserService;
-import com.mmsl.fiwmoney.util.JwtUtil;
 
 @RestController
 @RequestMapping("/api/auth")
