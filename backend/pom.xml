@@ -46,11 +46,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency>
+		<dependency>
     		<groupId>org.eclipse.dirigible</groupId>
     		<artifactId>dirigible-database-h2</artifactId>
     		<version>10.6.14</version>
-		</dependency> -->
+		</dependency>
 
 		<dependency>
     		<groupId>com.google.code.gson</groupId>
