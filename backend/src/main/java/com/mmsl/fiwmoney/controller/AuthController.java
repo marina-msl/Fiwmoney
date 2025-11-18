@@ -29,7 +29,7 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody UserDto user) {
 
        var registeredUser = userService.registerUser(user.username(), user.password(),
-                user.name(), user.email(), user.tenantId());
+                user.name(), user.email());
         
         if (registeredUser.isEmpty()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)

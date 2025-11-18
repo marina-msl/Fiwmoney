@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.mmsl.fiwmoney.dto.StockDTO;
 import com.mmsl.fiwmoney.dto.StockResult;
 import com.mmsl.fiwmoney.dto.StockResultMin;
 import com.mmsl.fiwmoney.model.Stock;
@@ -94,8 +95,8 @@ public class StockService {
         }    
     }
 
-    public void save(StockResult stockResult) {
-        repository.save(Stock.to(stockResult));
+    public void save(StockDTO stockDTO) {
+        repository.save(Stock.to(stockDTO));
     }
 
     @Transactional

@@ -1,6 +1,6 @@
 package com.mmsl.fiwmoney.model;
 
-import com.mmsl.fiwmoney.dto.StockResult;
+import com.mmsl.fiwmoney.dto.StockDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "stocks", uniqueConstraints= @UniqueConstraint(columnNames="code"))
+@Table(name = "stock", uniqueConstraints= @UniqueConstraint(columnNames="code"))
 public class Stock {
 
     @Id
@@ -116,12 +116,12 @@ public class Stock {
         return true;
     }
 
-    public static Stock to(StockResult stockResult) {
+    public static Stock to(StockDTO stockDTO) {
        Stock stock = new Stock();
-       stock.setCode(stockResult.getCode());
-       stock.setCurrentPrice(stockResult.getCurrentPrice());
-       stock.setAveragePrice(stockResult.getAveragePrice());
-       stock.setNotify(stockResult.getNotify());
+       stock.setCode(stockDTO.getCode());
+       stock.setCurrentPrice(stockDTO.getCurrentPrice());
+       stock.setAveragePrice(stockDTO.getAveragePrice());
+       stock.setNotify(stockDTO.isNotify());
 
        return stock;
     }

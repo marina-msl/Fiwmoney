@@ -14,10 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.mmsl.fiwmoney.controller.StockController;
+import com.mmsl.fiwmoney.controller.walletService;
 import com.mmsl.fiwmoney.service.StockService;
 
-@WebMvcTest(controllers = StockController.class,
+@WebMvcTest(controllers = walletService.class,
      excludeAutoConfiguration = {
         org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class,
         org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class

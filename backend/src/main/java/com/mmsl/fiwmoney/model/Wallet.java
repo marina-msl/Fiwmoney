@@ -3,8 +3,14 @@ package com.mmsl.fiwmoney.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Wallet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private List<Stock> stocks;
 
@@ -32,7 +38,5 @@ public class Wallet {
     public List <Stock> getStocks() {
         return new ArrayList<>(this.stocks);
     }
-
-    
     
 }
