@@ -6,9 +6,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.mmsl.fiwmoney.infrastructure.JwtUtil;
 import com.mmsl.fiwmoney.model.User;
 import com.mmsl.fiwmoney.repository.UserRepository;
-import com.mmsl.fiwmoney.util.JwtUtil;
 
 @Service
 public class AuthService {
@@ -28,6 +28,6 @@ public class AuthService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         
-        return jwtUtil.generateToken(user.getUsername(), user.getTenantId());
+        return jwtUtil.generateToken(user.getUsername());
     }
 }
