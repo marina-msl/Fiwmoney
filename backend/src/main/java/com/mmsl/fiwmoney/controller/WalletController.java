@@ -1,8 +1,13 @@
 package com.mmsl.fiwmoney.controller;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mmsl.fiwmoney.dto.StockDTO;
 import com.mmsl.fiwmoney.dto.StockRequest;
-import com.mmsl.fiwmoney.dto.StockResult;
-import com.mmsl.fiwmoney.dto.WalletDto;
 import com.mmsl.fiwmoney.service.StockService;
 import com.mmsl.fiwmoney.service.WalletService;
 
@@ -52,11 +55,13 @@ public class WalletController {
        .body(stockDTO);
     }
 
-    // @GetMapping(value = "/stocks")
-    // public ResponseEntity<List<Stock>> getAll() {
-    @GetMapping(value = "/wallet/{id}/stocks") {
-    public ResponseEntity<WalletDto> getStock(@PathVariable ("id") id) {
-        List<Stock> stocks = service.findAll();
+    @GetMapping(value = "/wallet/{id}/stocks")
+    public ResponseEntity<List<StockDTO>> getStock(@PathVariable ("id") Long id) {
+
+        List<StockDTO> stocks = walletService.getWalletById(id)
+            .map(w -> w.toDTO(w))
+            .map(wdto -> wdto.stocks())
+            .orElse(Collections.emptyList());
 
         return stocks.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(stocks);
     }

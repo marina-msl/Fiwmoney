@@ -3,6 +3,9 @@ package com.mmsl.fiwmoney.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mmsl.fiwmoney.dto.StockDTO;
+import com.mmsl.fiwmoney.dto.WalletDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,4 +44,26 @@ public class Wallet {
         return new ArrayList<>(this.stocks);
     }
     
+    public WalletDTO toDTO(Wallet wallet) {
+        
+        this.stocks = wallet.getStocks();
+        
+        List<StockDTO> stockDtos = new ArrayList<>();
+
+        for (Stock stock : stocks) {
+        
+            StockDTO dto = new StockDTO(
+                stock.getCode(),
+                stock.getCurrentPrice(),
+                stock.getAveragePrice(),
+                stock.isNotify()
+            );
+
+            stockDtos.add(dto);
+        }    
+        return new WalletDTO(wallet.id, stockDtos);
+
+    }
+
+
 }

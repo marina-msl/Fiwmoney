@@ -14,7 +14,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.mmsl.fiwmoney.dto.StockDTO;
-import com.mmsl.fiwmoney.dto.StockResult;
 import com.mmsl.fiwmoney.dto.StockResultMin;
 import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.repository.StockRepository;
