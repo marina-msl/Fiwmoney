@@ -16,7 +16,7 @@ import com.mmsl.fiwmoney.infrastructure.JwtUtil;
 import com.mmsl.fiwmoney.service.UserService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class AuthController {
                     .body(Map.of("error", "Username already exists"));
         }
 
-        String token = jwtUtil.generateToken(user.username(), user.tenantId());
+        String token = jwtUtil.generateToken(user.username());
         
         return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, user.username()));
     }
@@ -55,7 +55,7 @@ public class AuthController {
                     .body(Map.of("error", "Invalid username or password"));
         }
 
-        String token = jwtUtil.generateToken(userFound.get().getUsername(), userFound.get().getTenantId());
+        String token = jwtUtil.generateToken(userFound.get().getUsername());
 
         return ResponseEntity.ok(new AuthResponse(token, userFound.get().getUsername()));
     }
