@@ -1,5 +1,9 @@
 package com.mmsl.fiwmoney.dto;
 
+import lombok.AllArgsConstructor;
+
+
+@AllArgsConstructor
 public class StockRequest {
 
     private String code;

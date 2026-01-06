@@ -2,4 +2,14 @@ package com.mmsl.fiwmoney.dto;
 
 import java.util.List;
 
-public record WalletDTO(Long id,List<StockDTO> stocks) {}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@AllArgsConstructor
+@Data
+public class WalletDTO {
+    
+    private Long id;
+    private List<StockDTO> stock;
+
+}
