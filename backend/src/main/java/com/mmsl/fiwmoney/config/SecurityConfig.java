@@ -30,7 +30,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/api/auth/**", "/register").permitAll()
+            .requestMatchers("/auth/**", "/register").permitAll()
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
