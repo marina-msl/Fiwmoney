@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mmsl.fiwmoney.dto.StockDTO;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.WalletDTO;
-import com.mmsl.fiwmoney.service.StockService;
+import com.mmsl.fiwmoney.model.Wallet;
 import com.mmsl.fiwmoney.service.WalletService;
 
 @RestController
@@ -26,34 +26,25 @@ public class WalletController {
     private static final int NOT_FOUND = -1;
     
     @Autowired
-    private StockService service;
+    private Wallet service;
 
     @Autowired
     private WalletService walletService;
 
 
-    @PostMapping(value = "/stocks")
-    public ResponseEntity<StockDTO> getStock(@RequestBody StockRequest stock) {
+    @PostMapping(value = "/wallet/{id}/stock")
+    public ResponseEntity<StockDTO> getStock(@PathVariable("id") Long walletId, 
+                                            @RequestBody StockRequest stock) {
 
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
         }
 
-        String code = stock.getCode();
-        double averagePrice = stock.getAveragePrice();
-        boolean notify = stock.getNotify();
-        double currentPrice = service.fetchCurrentPrice(code);
-
-        if (currentPrice == NOT_FOUND) {
-            return ResponseEntity.notFound().build();
-        }
-
-        StockDTO stockDTO = new StockDTO(0L, code, currentPrice, averagePrice, notify);
-        service.save(stockDTO);
+       walletService.addStockToWallet(walletId, stock);
 
        return ResponseEntity.ok()
-       .header("X-Custom-Info", "Stock Data Response")
-       .body(stockDTO);
+            .header("X-Custom-Info", "Stock Data Response")
+            .body(stockDTO);
     }
 
     @GetMapping(value = "/wallet/{id}")
@@ -64,9 +55,10 @@ public class WalletController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/notify")
-    public ResponseEntity<String> isNotify(@RequestBody StockRequest stock) {
-        service.updateNotify(stock.getCode(), stock.getNotify());
+    @PatchMapping("/wallet/{id}/notify")
+    public ResponseEntity<String> isNotify(@PathVariable ("id") Long walletId,
+                                           @RequestBody StockRequest stock) {
+        walletService.updateNotify(walletId, stock.getCode(), stock.getNotify());
 
         return ResponseEntity.ok("Notify status updated for: " + stock.getCode());
     }
