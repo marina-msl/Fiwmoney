@@ -10,23 +10,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany
+    @JoinColumn(name = "wallet_id")
     private List<Stock> stocks;
-
-    public Wallet() {
-        this.stocks = new ArrayList<>();
-    }
-
-    public Wallet(Long id, List<Stock> stocks) {
-        this.id = id;
-        this.stocks = stocks;
-    }
 
     public void addStock(Stock stock) {
         this.stocks.add(stock);
@@ -44,25 +47,21 @@ public class Wallet {
         return new ArrayList<>(this.stocks);
     }
     
-    public WalletDTO toDTO(Wallet wallet) {
-        
-        this.stocks = wallet.getStocks();
-        
+    public WalletDTO toDTO() {
         List<StockDTO> stockDtos = new ArrayList<>();
 
-        for (Stock stock : stocks) {
-        
+        for (Stock stock : this.stocks) {
             StockDTO dto = new StockDTO(
+                stock.getId(),
                 stock.getCode(),
                 stock.getCurrentPrice(),
                 stock.getAveragePrice(),
                 stock.isNotify()
-            );
+        );
+        stockDtos.add(dto);
+    }
 
-            stockDtos.add(dto);
-        }    
-        return new WalletDTO(wallet.id, stockDtos);
-
+        return new WalletDTO(this.id, stockDtos);
     }
 
 

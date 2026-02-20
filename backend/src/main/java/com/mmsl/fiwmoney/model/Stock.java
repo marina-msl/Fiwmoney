@@ -23,20 +23,6 @@ public class Stock {
     private Double averagePrice;
     private boolean notify;
 
-    public Stock() {
-
-    }
-
-    public Stock(Long id, String code, Double currentPrice, Double averagePrice,
-                boolean notify) {
-        this.id = id;
-        this.code = code;
-        this.currentPrice = currentPrice;
-        this.averagePrice = averagePrice;
-        this.notify = notify;
-    }
-
-
     public static Stock to(StockDTO stockDTO) {
        Stock stock = new Stock();
        stock.setCode(stockDTO.getCode());

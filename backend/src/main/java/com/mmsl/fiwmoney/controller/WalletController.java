@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mmsl.fiwmoney.dto.StockDTO;
 import com.mmsl.fiwmoney.dto.StockRequest;
+import com.mmsl.fiwmoney.dto.WalletDTO;
 import com.mmsl.fiwmoney.service.StockService;
 import com.mmsl.fiwmoney.service.WalletService;
 
@@ -47,7 +48,7 @@ public class WalletController {
             return ResponseEntity.notFound().build();
         }
 
-        StockDTO stockDTO = new StockDTO(code, currentPrice, averagePrice, notify);
+        StockDTO stockDTO = new StockDTO(0L, code, currentPrice, averagePrice, notify);
         service.save(stockDTO);
 
        return ResponseEntity.ok()
@@ -55,15 +56,12 @@ public class WalletController {
        .body(stockDTO);
     }
 
-    @GetMapping(value = "/wallet/{id}/stocks")
-    public ResponseEntity<List<StockDTO>> getStock(@PathVariable ("id") Long id) {
+    @GetMapping(value = "/wallet/{id}")
+    public ResponseEntity<WalletDTO> getStock(@PathVariable ("id") Long id) {
 
-        List<StockDTO> stocks = walletService.getWalletById(id)
-            .map(w -> w.toDTO(w))
-            .map(wdto -> wdto.stocks())
-            .orElse(Collections.emptyList());
-
-        return stocks.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(stocks);
+        return walletService.getWalletById(id)
+                .map(wallet -> ResponseEntity.ok(wallet.toDTO()))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PatchMapping("/notify")

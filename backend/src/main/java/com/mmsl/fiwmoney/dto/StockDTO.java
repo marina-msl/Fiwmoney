@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class StockDTO {
 
+    private Long id;
     private String code;
     private double currentPrice;
     private double averagePrice;
