@@ -10,17 +10,20 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
-@Table(name = "stock", uniqueConstraints= @UniqueConstraint(columnNames="code"))
+@Table(name = "stock")
 public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long walletId;
     private String code;
-    private Double currentPrice;
-    private Double averagePrice;
+    private BigDecimal currentPrice;
+    private BigDecimal averagePrice;
     private boolean notify;
 
     public static Stock to(StockDTO stockDTO) {

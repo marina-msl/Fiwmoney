@@ -26,21 +26,18 @@ public class WalletController {
     private static final int NOT_FOUND = -1;
     
     @Autowired
-    private Wallet service;
-
-    @Autowired
     private WalletService walletService;
 
 
     @PostMapping(value = "/wallet/{id}/stock")
-    public ResponseEntity<StockDTO> getStock(@PathVariable("id") Long walletId, 
+    public ResponseEntity<StockDTO> getStock(@PathVariable("id") Long walletId,
                                             @RequestBody StockRequest stock) {
 
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
         }
 
-       walletService.addStockToWallet(walletId, stock);
+       StockDTO stockDTO = walletService.addStockToWallet(walletId, stock);
 
        return ResponseEntity.ok()
             .header("X-Custom-Info", "Stock Data Response")
@@ -58,7 +55,7 @@ public class WalletController {
     @PatchMapping("/wallet/{id}/notify")
     public ResponseEntity<String> isNotify(@PathVariable ("id") Long walletId,
                                            @RequestBody StockRequest stock) {
-        walletService.updateNotify(walletId, stock.getCode(), stock.getNotify());
+        walletService.updateNotify(walletId, stock.getCode(), stock.isNotify());
 
         return ResponseEntity.ok("Notify status updated for: " + stock.getCode());
     }

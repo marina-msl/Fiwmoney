@@ -11,8 +11,6 @@ public class WalletDTO {
     
     private Long id;
     private List<StockDTO> stocks;
-
-
-    
+ 
 
 }

@@ -1,8 +1,9 @@
 package com.mmsl.fiwmoney.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
-
+@Data
 @AllArgsConstructor
 public class StockRequest {
 
@@ -18,7 +19,7 @@ public class StockRequest {
         return averagePrice;
     }
 
-    public boolean getNotify() {
+    public boolean isNotify() {
         return notify;
     }
 }
