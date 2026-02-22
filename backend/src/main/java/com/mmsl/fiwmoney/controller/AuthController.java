@@ -2,6 +2,7 @@ package com.mmsl.fiwmoney.controller;
 
 import java.util.Map;
 
+import com.mmsl.fiwmoney.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,19 +27,21 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDto user) {
+    public ResponseEntity<?> register(@RequestBody UserDto dto) {
 
-       var registeredUser = userService.registerUser(user.username(), user.password(),
-                user.name(), user.email());
+       var registeredUser = userService.registerUser(dto.username(), dto.password(),
+                dto.name(), dto.email());
         
         if (registeredUser.isEmpty()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Map.of("error", "Username already exists"));
         }
 
-        String token = jwtUtil.generateToken(user.username());
-        
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, user.username()));
+        String token = jwtUtil.generateToken(dto.username());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token,
+                                        registeredUser.get().getWallet().getId(),
+                                        registeredUser.get().getUsername()));
     }
 
     @PostMapping("/login")
@@ -57,6 +60,6 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(userFound.get().getUsername());
 
-        return ResponseEntity.ok(new AuthResponse(token, userFound.get().getUsername()));
+        return ResponseEntity.ok(new AuthResponse(token, userFound.get().getWallet().getId(), userFound.get().getUsername()));
     }
 }

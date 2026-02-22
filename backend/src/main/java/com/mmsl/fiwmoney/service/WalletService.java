@@ -73,6 +73,7 @@ public class WalletService {
         return stock.getAveragePrice().compareTo(stock.getCurrentPrice()) > 0;
     }
 
+    @Transactional
     @Scheduled(fixedRate=ONE_HOUR)
     // @Scheduled(fixedRate=5000)
     public void updateStockPrices() {
