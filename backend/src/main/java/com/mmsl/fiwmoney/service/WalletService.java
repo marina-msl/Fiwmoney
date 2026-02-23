@@ -4,11 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import com.mmsl.fiwmoney.dto.StockDTO;
-import com.mmsl.fiwmoney.dto.StockRequest;
-import com.mmsl.fiwmoney.dto.StockResultMin;
-import com.mmsl.fiwmoney.exception.WalletNotFoundException;
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +12,18 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
+import com.mmsl.fiwmoney.dto.StockDTO;
+import com.mmsl.fiwmoney.dto.StockRequest;
+import com.mmsl.fiwmoney.dto.StockResultMin;
+import com.mmsl.fiwmoney.exception.WalletNotFoundException;
 import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.model.Wallet;
 import com.mmsl.fiwmoney.repository.WalletRepository;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -115,9 +116,9 @@ public class WalletService {
         BigDecimal currentPrice = fetchCurrentPrice(request.getCode());
 
         Stock stock = new Stock();
-        stock.setCode(stock.getCode());
+        stock.setCode(request.getCode());
         stock.setCurrentPrice(currentPrice);
-        stock.setAveragePrice(stock.getAveragePrice());
+        stock.setAveragePrice(request.getAveragePrice());
         stock.setNotify(request.isNotify());
 
 
@@ -145,5 +146,18 @@ public class WalletService {
     public Optional<Wallet> getWalletById(Long id) {
         return walletRepository.findById(id);
     } 
-    
+
+    public void removeStockFromWallet(Long walletId, String code) {
+        Wallet wallet = walletRepository.findById(walletId)
+                .orElseThrow(() -> new WalletNotFoundException(walletId));
+
+        wallet.getStocks().stream()
+                        .filter(stock -> stock.getCode().equals(code))
+                        .findFirst()
+                        .ifPresent(stock -> wallet.removeStock(stock));
+
+        walletRepository.save(wallet);
+    }
+
+
 }

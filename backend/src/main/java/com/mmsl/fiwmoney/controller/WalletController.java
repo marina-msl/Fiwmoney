@@ -59,4 +59,11 @@ public class WalletController {
 
         return ResponseEntity.ok("Notify status updated for: " + stock.getCode());
     }
+
+    @DeleteMapping("/wallet/{id}/stock/{code}")
+    public ResponseEntity<String> removeStock(@PathVariable ("id") Long walletId,
+                                             @PathVariable ("code") String code) {
+        walletService.removeStockFromWallet(walletId, code);
+        return ResponseEntity.ok("Stock removed from wallet");
+    }
 }
