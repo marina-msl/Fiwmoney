@@ -1,5 +1,7 @@
 package com.mmsl.fiwmoney.dto;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,14 +10,14 @@ import lombok.Data;
 public class StockRequest {
 
     private String code;
-    private double averagePrice;
+    private BigDecimal averagePrice;
     private boolean notify;
 
     public String getCode() {
         return code;
     }
 
-    public double getAveragePrice() {
+    public BigDecimal getAveragePrice() {
         return averagePrice;
     }
 
