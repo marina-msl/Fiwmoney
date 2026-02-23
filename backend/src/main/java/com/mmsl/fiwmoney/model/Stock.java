@@ -20,7 +20,7 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long walletId;
+//    private Long walletId;
     private String code;
     private BigDecimal currentPrice;
     private BigDecimal averagePrice;
