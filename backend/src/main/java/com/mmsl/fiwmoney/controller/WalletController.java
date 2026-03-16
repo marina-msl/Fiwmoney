@@ -19,16 +19,13 @@ import com.mmsl.fiwmoney.service.WalletService;
 @RestController
 @RequestMapping(value = "/")
 public class WalletController {
-    
-    private static final int NOT_FOUND = -1;
-    
+
     @Autowired
     private WalletService walletService;
 
-
-    @PostMapping(value = "/wallet/{id}/stock")
-    public ResponseEntity<StockDTO> getStock(@PathVariable("id") Long walletId,
-                                            @RequestBody StockRequest stock) {
+    @PostMapping(value = "/wallet/{walletId}/stock")
+    public ResponseEntity<StockDTO> addStockToWallet(@PathVariable Long walletId,
+                                                     @RequestBody StockRequest stock) {
 
         if (stock.getCode() == null) {
             return ResponseEntity.badRequest().build();
@@ -42,19 +39,20 @@ public class WalletController {
     }
 
     @GetMapping(value = "/wallet/{id}")
-    public ResponseEntity<WalletDTO> getStock(@PathVariable ("id") Long id) {
+    public ResponseEntity<WalletDTO> getWallet(@PathVariable Long id) {
 
         return walletService.getWalletById(id)
                 .map(wallet -> ResponseEntity.ok(wallet.toDTO()))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/wallet/{id}/notify")
-    public ResponseEntity<String> isNotify(@PathVariable ("id") Long walletId,
+    @PatchMapping("/wallet/{walletId}/stock/{code}/notify")
+    public ResponseEntity<String> updateNotify(@PathVariable Long walletId,
+                                           @PathVariable String code,
                                            @RequestBody StockRequest stock) {
-        walletService.updateNotify(walletId, stock.getCode(), stock.isNotify());
+        walletService.updateNotify(walletId, code, stock.isNotify());
 
-        return ResponseEntity.ok("Notify status updated for: " + stock.getCode());
+        return ResponseEntity.ok("Notify status updated for: " + code);
     }
 
     @DeleteMapping("/wallet/{id}/stock/{code}")
