@@ -49,4 +49,18 @@ Clone the whole projet to your machine.
 - [X] Implement REST Controller to Register
 - [x] Implement UserService, UserRepository, UserDTO
 
- 
+# Load Testing
+
+Tests performed with [k6](https://k6.io) on `GET /wallet/{id}` with JWT authentication.
+
+| Metric | 50 VUs | 500 VUs |
+|---|---|---|
+| Status 200 | 100% | 100% |
+| Response < 500ms | 93% | 26% |
+| Median response time | 47ms | 1.42s |
+| p90 | 353ms | 3.09s |
+| p95 | 547ms | 3.46s |
+| Max | 922ms | 7.07s |
+| HTTP failures | 0% | 0% |
+
+**Analysis:** The server dropped no requests in either scenario. With 50 VUs the API is responsive and within acceptable limits. With 500 VUs response times degrade due to HikariCP's default connection pool (10 connections), causing threads to queue for DB access. Increasing `spring.datasource.hikari.maximum-pool-size` is the first optimization step for higher concurrency.
