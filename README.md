@@ -36,6 +36,9 @@ Clone the whole projet to your machine.
     - - [ ] Deploy with docker or AWS?
     - - [ ] Unity tests?
 - [ ] change to Mongo DB?
+- [ ] Fix email sending — currently not working
+- [ ] Implement backend endpoints for user profile update (frontend already done)
+- [ ] Improve current price editing on the frontend
 
 #### Done:
 
