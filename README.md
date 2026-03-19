@@ -35,14 +35,10 @@ Clone the whole projet to your machine.
     - Handle deployment
     - - [ ] Deploy with docker or AWS?
     - - [ ] Unity tests?
-- [ ] Spring security and JWT? In progress:
-        - [ ] Implement REST Controller to Login
-        - [ ] Frontend is already sending the headers?
-            
-- [ ] change to Mongo DB?  
-  
+- [ ] change to Mongo DB?
+
 #### Done:
- 
+
 - [X] Frotend? Change to Vue Framework?
 - [X] BD no Docker?
 - [X] Change to PostgreSQL
@@ -54,6 +50,14 @@ Clone the whole projet to your machine.
 - [X] Implement register and login in frontend
 - [X] Implement REST Controller to Register
 - [x] Implement UserService, UserRepository, UserDTO
+- [X] Spring security and JWT
+    - [X] Implement REST Controller to Login
+    - [X] Frontend is already sending the headers
+
+#### TODO (technical debt):
+- [ ] Fix O(n²) in `updateStockPrices` — deduplicate stock fetch by code
+- [ ] Fix hardcoded email in `sendMessage` — should use the user's email from DB
+- [ ] Move OpenAI API key to environment variable (currently in application.properties)
 
 # Load Testing
 
