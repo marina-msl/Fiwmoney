@@ -1,5 +1,11 @@
 # Fiwmoney
 
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.1-green)
+![Spring AI](https://img.shields.io/badge/Spring%20AI-1.1.2-blue)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
+![Licença](https://img.shields.io/badge/Licença-Educacional-lightgrey)
+
 - The application has been developed with Vue.js, CSS, Java Script and HTML in frontend and the backend is Java, SpringBoot, Spring Security, Lombok etc.
 - The application purpose is to expand my portifolio and also build an useful tool for myself. I'm a big fan of investiments and I realized the need of having a application which could let me know when the stocks are cheapers then my average price (It's time to go shopping!).
 - Once this application is to just enrich my knowlege, feel free to make any sugestions, since the clean code and SOLID principles, tecnologies or anything else!
