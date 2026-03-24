@@ -39,6 +39,7 @@ Clone the whole projet to your machine.
 - [ ] Fix email sending — currently not working
 - [ ] Implement backend endpoints for user profile update (frontend already done)
 - [ ] Improve current price editing on the frontend
+- [ ] Implement OTP (One-Time Password) authentication
 
 #### Done:
 
