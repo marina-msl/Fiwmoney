@@ -1,19 +1,19 @@
 package com.mmsl.fiwmoney.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
+import com.mmsl.fiwmoney.event.StockPriceUpdatedEvent;
 import com.mmsl.fiwmoney.model.Stock;
-import com.mmsl.fiwmoney.model.Wallet;
 
 
+@Component
 public class NotificationListener {
 
     private static final Logger log = LoggerFactory.getLogger(WalletService.class);
@@ -35,19 +35,12 @@ public class NotificationListener {
         }
     }
 
-    // @Scheduled(fixedRate=5000)
-    public void sendMessage(Long walletId) {
-        Optional<Wallet> wallet = walletRepository.findById(walletId);
-        Wallet walletOrg = wallet.orElse(null);
-
-        assert walletOrg != null;
-        List<Stock> stocks = walletOrg.getStocks();
-
-        for (Stock stock : stocks) {
-            if (averagePriceIsHigher(stock)) {
-                sendMessage(stock);
-            }
+    @EventListener
+    public void onStockPriceUpdated(StockPriceUpdatedEvent event) {
+        Stock stock = event.getStock();
+        if (stock.isNotify() && stock.getAveragePrice().compareTo(stock.getCurrentPrice()) > 0) {
+            sendMessage(stock);
         }
     }
-    
+      
 }
