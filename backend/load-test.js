@@ -10,11 +10,18 @@ export let options = {
 };
 
 const BASE_URL = 'http://localhost:8080';
-const TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYTEifQ.opp4jpelCzsRV1kJJpefKqu08eV3PoZKRZR8O188_Xs';
 
-export default function () {
+export function setup() {
+  let res = http.post(`${BASE_URL}/auth/login`,
+    JSON.stringify({ username: 'ma1', password: '123' }),
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+  return { token: JSON.parse(res.body).token };
+}
+
+export default function (data) {
   let res = http.get(`${BASE_URL}/wallet/3`, {
-    headers: { Authorization: `Bearer ${TOKEN}` },
+    headers: { Authorization: `Bearer ${data.token}` },
   });
 
   check(res, {
