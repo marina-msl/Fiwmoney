@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.mmsl</groupId>
 	<artifactId>fiwmoney</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>fiwmoney</name>
 	<description>Financial project</description>
 	<url/>
@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.7.6</version>
+			<version>42.7.7</version>
 		</dependency>
 
 		<dependency>
