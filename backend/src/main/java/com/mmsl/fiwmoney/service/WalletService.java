@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,9 @@ public class WalletService {
 
     private static final Logger log = LoggerFactory.getLogger(WalletService.class);
     private static final int ONE_HOUR = 3600000;
-    private static final String STOCK_SEARCH_URL = "http://localhost:8090/stocks/";
+    
+    @Value("${stock.api.url}")
+    private String stockSearchUrl;
 
     private final RestTemplate restTemplate = new RestTemplate();
    
@@ -67,7 +70,7 @@ public class WalletService {
         }
     }
 
-    @Scheduled(fixedRate=5000)
+    //@Scheduled(fixedRate=5000)
     public void sendMessage(Long walletId) {
         Optional<Wallet> wallet = walletRepository.findById(walletId);
         Wallet walletOrg = wallet.orElse(null);
@@ -83,7 +86,7 @@ public class WalletService {
     }
 
     private BigDecimal fetchCurrentPrice(String stockCode) {
-        String url = STOCK_SEARCH_URL + stockCode;
+        String url = stockSearchUrl + stockCode;
 
         try {
             StockResultMin response = restTemplate.getForObject(url, StockResultMin.class);

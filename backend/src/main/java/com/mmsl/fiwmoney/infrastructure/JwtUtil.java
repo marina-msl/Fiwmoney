@@ -1,20 +1,27 @@
 package com.mmsl.fiwmoney.infrastructure;
 
+import java.util.Base64;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
-    
-    private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+    private final SecretKey key;
+
+    public JwtUtil(@Value("${jwt.secret}") String secret) {
+        byte[] keyBytes = Base64.getDecoder().decode(secret);
+        this.key = new SecretKeySpec(keyBytes, SignatureAlgorithm.HS256.getJcaName());
+    }
 
     public String generateToken(String username) {
         return Jwts.builder()
