@@ -29,19 +29,23 @@ import jakarta.transaction.Transactional;
 @Service
 public class WalletService {
 
-    @Autowired
-    private WalletRepository walletRepository;
-
     private static final Logger log = LoggerFactory.getLogger(WalletService.class);
     private static final int ONE_HOUR = 3600000;
     
     @Value("${stock.api.url}")
     private String stockSearchUrl;
 
-    private final RestTemplate restTemplate = new RestTemplate();
-   
-    @Autowired
+    private final RestTemplate restTemplate;
+    private WalletRepository walletRepository;
+
+       @Autowired
     private ApplicationEventPublisher eventPublisher;
+
+
+    public WalletService(RestTemplate restTemplate, WalletRepository walletRepository) {
+        this.restTemplate = restTemplate;
+        this.walletRepository = walletRepository;
+    }
 
     private boolean averagePriceIsHigher(Stock stock) {
         return stock.getAveragePrice().compareTo(stock.getCurrentPrice()) > 0;
