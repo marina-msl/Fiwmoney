@@ -24,7 +24,7 @@ public class Wallet {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "wallet_id")
-    private List<Stock> stocks;
+    private List<Stock> stocks = new ArrayList<>();
 
     public void addStock(Stock stock) {
         this.stocks.add(stock);
