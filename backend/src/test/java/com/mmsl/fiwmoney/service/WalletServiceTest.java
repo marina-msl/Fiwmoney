@@ -1,27 +1,27 @@
 package com.mmsl.fiwmoney.service;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
 import com.mmsl.fiwmoney.dto.StockDTO;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResultMin;
-import com.mmsl.fiwmoney.model.Stock;
 import com.mmsl.fiwmoney.model.Wallet;
 import com.mmsl.fiwmoney.repository.WalletRepository;
 
@@ -46,6 +46,8 @@ class WalletServiceTest {
         Wallet wallet = new Wallet();
         wallet.setId(walletId);
 
+        // TODO: test fetchCurrentPrice when API returns 404 (should return -1)
+        // TODO: test fetchCurrentPrice when API returns null response (should return BigDecimal.ZERO)
         StockResultMin stockResultMin = new StockResultMin();
         stockResultMin.setPrice(new BigDecimal("150.00"));
 
