@@ -1,6 +1,5 @@
 package com.mmsl.fiwmoney.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,11 @@ import com.mmsl.fiwmoney.service.WalletService;
 @RequestMapping(value = "/")
 public class WalletController {
 
-    @Autowired
     private WalletService walletService;
+
+    public WalletController(WalletService walletService) {
+        this.walletService = walletService;
+    }
 
     @PostMapping(value = "/wallet/{walletId}/stock")
     public ResponseEntity<StockDTO> addStockToWallet(@PathVariable Long walletId,
@@ -31,7 +33,7 @@ public class WalletController {
             return ResponseEntity.badRequest().build();
         }
 
-       StockDTO stockDTO = walletService.addStockToWallet(walletId, stock);
+       StockDTO stockDTO = this.walletService.addStockToWallet(walletId, stock);
 
        return ResponseEntity.ok()
             .header("X-Custom-Info", "Stock Data Response")
@@ -41,7 +43,7 @@ public class WalletController {
     @GetMapping(value = "/wallet/{id}")
     public ResponseEntity<WalletDTO> getWallet(@PathVariable Long id) {
 
-        return walletService.getWalletById(id)
+        return this.walletService.getWalletById(id)
                 .map(wallet -> ResponseEntity.ok(wallet.toDTO()))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -50,7 +52,7 @@ public class WalletController {
     public ResponseEntity<String> updateNotify(@PathVariable Long walletId,
                                            @PathVariable String code,
                                            @RequestBody StockRequest stock) {
-        walletService.updateNotify(walletId, code, stock.isNotify());
+        this.walletService.updateNotify(walletId, code, stock.isNotify());
 
         return ResponseEntity.ok("Notify status updated for: " + code);
     }
@@ -58,7 +60,7 @@ public class WalletController {
     @DeleteMapping("/wallet/{id}/stock/{code}")
     public ResponseEntity<String> removeStock(@PathVariable ("id") Long walletId,
                                              @PathVariable ("code") String code) {
-        walletService.removeStockFromWallet(walletId, code);
+        this.walletService.removeStockFromWallet(walletId, code);
         return ResponseEntity.ok("Stock removed from wallet");
     }
 }
