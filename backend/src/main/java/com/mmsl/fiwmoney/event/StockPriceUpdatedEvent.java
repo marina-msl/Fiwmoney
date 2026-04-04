@@ -1,14 +1,12 @@
 package com.mmsl.fiwmoney.event;
 
-import com.mmsl.fiwmoney.model.Stock;
+import com.mmsl.fiwmoney.domain.entities.Stock;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor
 public class StockPriceUpdatedEvent {
-    
-    private final Stock stock;
-    
+
+    public Stock getStock() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStock'");
+    }
+
 }

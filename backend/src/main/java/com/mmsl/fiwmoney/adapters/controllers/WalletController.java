@@ -1,5 +1,6 @@
-package com.mmsl.fiwmoney.controller;
+package com.mmsl.fiwmoney.adapters.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mmsl.fiwmoney.dto.StockDTO;
+import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.WalletDTO;
 import com.mmsl.fiwmoney.service.WalletService;
@@ -19,21 +20,18 @@ import com.mmsl.fiwmoney.service.WalletService;
 @RequestMapping(value = "/")
 public class WalletController {
 
+    @Autowired
     private WalletService walletService;
 
-    public WalletController(WalletService walletService) {
-        this.walletService = walletService;
-    }
-
     @PostMapping(value = "/wallet/{walletId}/stock")
-    public ResponseEntity<StockDTO> addStockToWallet(@PathVariable Long walletId,
+    public ResponseEntity<StockResponse> addStockToWallet(@PathVariable Long walletId,
                                                      @RequestBody StockRequest stock) {
 
-        if (stock.getCode() == null) {
+        if (stock.code() == null) {
             return ResponseEntity.badRequest().build();
         }
 
-       StockDTO stockDTO = this.walletService.addStockToWallet(walletId, stock);
+       StockResponse stockDTO = this.walletService.addStockToWallet(walletId, stock);
 
        return ResponseEntity.ok()
             .header("X-Custom-Info", "Stock Data Response")

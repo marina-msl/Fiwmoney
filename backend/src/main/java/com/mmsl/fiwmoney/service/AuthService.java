@@ -6,9 +6,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.mmsl.fiwmoney.adapters.repositories.user.UserJPARepository;
+import com.mmsl.fiwmoney.domain.entities.User;
 import com.mmsl.fiwmoney.infrastructure.JwtUtil;
-import com.mmsl.fiwmoney.model.User;
-import com.mmsl.fiwmoney.repository.UserRepository;
 
 @Service
 public class AuthService {
@@ -17,7 +17,7 @@ public class AuthService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJPARepository userRepository;
 
     @Autowired
     private JwtUtil jwtUtil;

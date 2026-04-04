@@ -19,6 +19,15 @@ Clone the whole projet to your machine.
 
 **Getting start with backend:** initialize the aplication in the IDE of your choice.
 
+## Configuration
+
+The `application.properties` file contains properties to control which repository implementation is used:
+
+| Property | Values | Description |
+|---|---|---|
+| `wallet.repository` | `jpa` \| `memory` | `jpa` persists wallets in PostgreSQL. `memory` stores in memory (data lost on restart, useful for local testing without a database). |
+| `user.repository` | `jpa` \| `memory` | `jpa` persists users in PostgreSQL. `memory` stores in memory (same trade-offs as above). |
+
 **This project use an API to check the stock's prices:** to check the API, [click here](https://github.com/marina-msl/search-stock-api)
 
 # Sequence Diagram
@@ -33,7 +42,7 @@ Clone the whole projet to your machine.
     - Set up with git actions
     - Implement some tests
     - Handle deployment
-    - - [ ] Deploy with docker or AWS?
+    - - [ ] Deploy with docker in AWS or GCP?
     - - [ ] Unity tests?
 - [ ] change to Mongo DB?
 - [ ] Fix email sending — currently not working

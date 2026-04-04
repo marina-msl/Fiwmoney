@@ -8,9 +8,9 @@ import org.checkerframework.checker.index.qual.Positive;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;
 
+import com.mmsl.fiwmoney.domain.entities.Stock;
+import com.mmsl.fiwmoney.domain.entities.Wallet;
 import com.mmsl.fiwmoney.exception.WalletNotFoundException;
-import com.mmsl.fiwmoney.model.Stock;
-import com.mmsl.fiwmoney.model.Wallet;
 import com.mmsl.fiwmoney.service.WalletService;
 
 @Service

@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mmsl.fiwmoney.model.User;
-import com.mmsl.fiwmoney.model.Wallet;
-import com.mmsl.fiwmoney.repository.UserRepository;
+import com.mmsl.fiwmoney.domain.entities.User;
+import com.mmsl.fiwmoney.domain.entities.Wallet;
+import com.mmsl.fiwmoney.domain.ports.IUserRepository;
 
 @Service
 public class UserService {
     
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,8 +35,7 @@ public class UserService {
                 .wallet(new Wallet())
                 .build();
 
-        return Optional.of(userRepository.save(user));
-
+        return userRepository.save(user);
     }
 
     public boolean checkPassword(User user, String rawPassword) {

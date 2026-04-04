@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.model;
+package com.mmsl.fiwmoney.domain.entities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

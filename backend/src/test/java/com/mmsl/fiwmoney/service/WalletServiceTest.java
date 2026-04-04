@@ -19,17 +19,17 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
-import com.mmsl.fiwmoney.dto.StockDTO;
+import com.mmsl.fiwmoney.adapters.repositories.wallet.WalletJPARepository;
+import com.mmsl.fiwmoney.domain.entities.Wallet;
+import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResultMin;
-import com.mmsl.fiwmoney.model.Wallet;
-import com.mmsl.fiwmoney.repository.WalletRepository;
 
 @ExtendWith(MockitoExtension.class)
 class WalletServiceTest {
 
     @Mock
-    private WalletRepository walletRepository;
+    private WalletJPARepository walletRepository;
 
     @Mock
     private RestTemplate restTemplate;
@@ -55,7 +55,7 @@ class WalletServiceTest {
         when(restTemplate.getForObject(anyString(), eq(StockResultMin.class))).thenReturn(stockResultMin);
 
         //ACT
-        StockDTO result = walletService.addStockToWallet(walletId, request);
+        StockResponse result = walletService.addStockToWallet(walletId, request);
 
         //ASSERT
         assertNotNull(result);

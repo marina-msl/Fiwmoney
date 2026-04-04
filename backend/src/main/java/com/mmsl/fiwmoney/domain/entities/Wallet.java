@@ -1,9 +1,9 @@
-package com.mmsl.fiwmoney.model;
+package com.mmsl.fiwmoney.domain.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mmsl.fiwmoney.dto.StockDTO;
+import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.WalletDTO;
 
 import jakarta.persistence.*;
@@ -43,10 +43,10 @@ public class Wallet {
     }
     
     public WalletDTO toDTO() {
-        List<StockDTO> stockDtos = new ArrayList<>();
+        List<StockResponse> stockDtos = new ArrayList<>();
 
         for (Stock stock : this.stocks) {
-            StockDTO dto = new StockDTO(
+            StockResponse dto = new StockResponse(
                 stock.getId(),
                 stock.getCode(),
                 stock.getCurrentPrice(),

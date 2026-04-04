@@ -1,8 +1,7 @@
-package com.mmsl.fiwmoney.controller;
+package com.mmsl.fiwmoney.adapters.controllers;
 
 import java.util.Map;
 
-import com.mmsl.fiwmoney.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmsl.fiwmoney.domain.entities.User;
 import com.mmsl.fiwmoney.dto.AuthResponse;
 import com.mmsl.fiwmoney.dto.UserDto;
 import com.mmsl.fiwmoney.infrastructure.JwtUtil;

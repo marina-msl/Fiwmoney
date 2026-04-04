@@ -9,8 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.event.StockPriceUpdatedEvent;
-import com.mmsl.fiwmoney.model.Stock;
 
 
 @Component
