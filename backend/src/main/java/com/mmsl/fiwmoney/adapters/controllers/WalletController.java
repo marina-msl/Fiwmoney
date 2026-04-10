@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mmsl.fiwmoney.dto.StockResponse;
+import com.mmsl.fiwmoney.application.service.WalletService;
 import com.mmsl.fiwmoney.dto.StockRequest;
-import com.mmsl.fiwmoney.dto.WalletDTO;
-import com.mmsl.fiwmoney.service.WalletService;
+import com.mmsl.fiwmoney.dto.StockResponse;
+import com.mmsl.fiwmoney.dto.WalletResponse;
 
 @RestController
 @RequestMapping(value = "/")
@@ -39,10 +39,10 @@ public class WalletController {
     }
 
     @GetMapping(value = "/wallet/{id}")
-    public ResponseEntity<WalletDTO> getWallet(@PathVariable Long id) {
+    public ResponseEntity<WalletResponse> getWallet(@PathVariable Long id) {
 
         return this.walletService.getWalletById(id)
-                .map(wallet -> ResponseEntity.ok(wallet.toDTO()))
+                .map(walletResponse -> ResponseEntity.ok(walletResponse))
                 .orElse(ResponseEntity.notFound().build());
     }
 

@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.service;
+package com.mmsl.fiwmoney.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

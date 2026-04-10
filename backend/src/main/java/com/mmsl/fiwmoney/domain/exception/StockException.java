@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.exception;
+package com.mmsl.fiwmoney.domain.exception;
 
 public class StockException extends RuntimeException {
 

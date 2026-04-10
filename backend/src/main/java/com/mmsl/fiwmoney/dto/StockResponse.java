@@ -12,7 +12,7 @@ public record StockResponse(
     boolean notifyEnabled
 ) {
 
-    public static StockResponse to(Stock stock) {
+    public static StockResponse fromEntity(Stock stock) {
         return new StockResponse(
             stock.getId(),
             stock.getCode(),

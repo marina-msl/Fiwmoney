@@ -1,6 +1,6 @@
 package com.mmsl.fiwmoney.dto;
 
-public record  UserDto (
+public record  UserRequest (
     String username,
     String password,
     String name,

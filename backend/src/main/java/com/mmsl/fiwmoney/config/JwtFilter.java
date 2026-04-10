@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.mmsl.fiwmoney.infrastructure.JwtUtil;
+import com.mmsl.fiwmoney.adapters.security.JwtUtil;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

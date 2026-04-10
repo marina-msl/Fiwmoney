@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.service;
+package com.mmsl.fiwmoney.application.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,7 @@ public class NotificationListener {
     
     @Autowired
     private JavaMailSender mailSender;
+
     @Autowired
     private SimpleMailMessage templateMessage;
 

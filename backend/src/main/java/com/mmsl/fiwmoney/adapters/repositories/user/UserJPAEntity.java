@@ -1,4 +1,7 @@
-package com.mmsl.fiwmoney.domain.entities;
+package com.mmsl.fiwmoney.adapters.repositories.user;
+
+import com.mmsl.fiwmoney.adapters.repositories.wallet.WalletJPAEntity;
+import com.mmsl.fiwmoney.domain.entities.Wallet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -16,15 +19,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@Entity
+@Table(name = "user_account")
+public class UserJPAEntity {
     
-     private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String username;
     private String password;
     private String name;
     private String email;
 
-    private Wallet wallet;
+    @OneToOne(cascade = CascadeType.ALL)
+    private WalletJPAEntity wallet;
 
 }

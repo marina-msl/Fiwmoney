@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.service;
+package com.mmsl.fiwmoney.application.service;
 
 import java.util.Optional;
 
@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mmsl.fiwmoney.domain.entities.User;
-import com.mmsl.fiwmoney.domain.entities.Wallet;
 import com.mmsl.fiwmoney.domain.ports.IUserRepository;
 
 @Service
@@ -20,23 +19,23 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    public Optional<User> registerUser(String username, String password, String name, String email) {
+    // public Optional<AuthResponse> registerUser(String username, String password, String name, String email) {
 
-        if (existsByUsername(username)) {
+    //     // if (existsByUsername(username)) {
 
-              return Optional.empty();
-        }    
+    //     //       return Optional.empty();
+    //     // }    
 
-        User user = User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .name(name)
-                .email(email)
-                .wallet(new Wallet())
-                .build();
+    //     User user = User.builder()
+    //             .username(username)
+    //             .password(passwordEncoder.encode(password))
+    //             .name(name)
+    //             .email(email)
+    //             .wallet(new Wallet())
+    //             .build();
 
-        return userRepository.save(user);
-    }
+    //    userRepository.save(user);
+    // }
 
     public boolean checkPassword(User user, String rawPassword) {
         return passwordEncoder.matches(rawPassword, user.getPassword());

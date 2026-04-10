@@ -17,9 +17,8 @@ public class UserMemoryRepositoryImpl implements IUserRepository {
     private final List<User> users = new ArrayList<>();
 
     @Override
-    public Optional<User> save(User user) {
+    public void save(User user) {
         this.users.add(user);
-        return Optional.of(user);
     }
 
     @Override

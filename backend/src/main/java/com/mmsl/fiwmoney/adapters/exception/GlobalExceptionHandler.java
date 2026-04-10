@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.exception;
+package com.mmsl.fiwmoney.adapters.exception;
 
 import java.util.Map;
 

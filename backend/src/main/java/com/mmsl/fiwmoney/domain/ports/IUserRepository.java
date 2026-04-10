@@ -6,7 +6,7 @@ import com.mmsl.fiwmoney.domain.entities.User;
 
 public interface IUserRepository {
 
-    Optional<User> save(User user);
+    void save(User user);
     
     Optional<User> findByUsername(String username);
     

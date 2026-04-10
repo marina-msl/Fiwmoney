@@ -10,42 +10,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mmsl.fiwmoney.domain.entities.User;
+import com.mmsl.fiwmoney.adapters.security.JwtUtil;
+import com.mmsl.fiwmoney.application.service.UserService;
 import com.mmsl.fiwmoney.dto.AuthResponse;
-import com.mmsl.fiwmoney.dto.UserDto;
-import com.mmsl.fiwmoney.infrastructure.JwtUtil;
-import com.mmsl.fiwmoney.service.UserService;
+import com.mmsl.fiwmoney.dto.UserRequest;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
     private UserService userService;
 
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDto dto) {
-
-       var registeredUser = userService.registerUser(dto.username(), dto.password(),
-                dto.name(), dto.email());
-        
-        if (registeredUser.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(Map.of("error", "Username already exists"));
-        }
-
-        String token = jwtUtil.generateToken(dto.username());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token,
-                                        registeredUser.get().getWallet().getId(),
-                                        registeredUser.get().getUsername()));
+    public AuthController(UserService userService) {
+        this.userService = userService;
     }
 
+    // @PostMapping("/register")
+    // public ResponseEntity<AuthResponse> register(@RequestBody UserRequest request) {
+
+    //    var registeredUser = userService.registerUser(request.username(), request.password(),
+    //             request.name(), request.email());
+        
+    //     if (registeredUser.isEmpty()) {
+    //         return ResponseEntity.status(HttpStatus.CONFLICT)
+    //                 .body(Map.of("error", "Username already exists"));
+    //     }
+
+    //     String token = jwtUtil.generateToken(request.username());
+
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token,
+    //                                     registeredUser.get().getWallet().getId(),
+    //                                     registeredUser.get().getUsername()));
+    // }
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDto user) { 
+    public ResponseEntity<?> login(@RequestBody UserRequest user) { 
         var userFound = userService.findByUsername(user.username());
         
         if (userFound.isEmpty()) {

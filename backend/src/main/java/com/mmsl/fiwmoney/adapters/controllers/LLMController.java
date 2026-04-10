@@ -6,7 +6,6 @@ public class LLMController {
 
     private final ChatClient ai;
 
-
     LLMController(ChatClient ai) {
         this.ai = ai;
     }

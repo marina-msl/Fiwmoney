@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.service;
+package com.mmsl.fiwmoney.application.service;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -6,21 +6,20 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.mmsl.fiwmoney.adapters.repositories.wallet.WalletJPARepository;
 import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
+import com.mmsl.fiwmoney.domain.exception.WalletNotFoundException;
 import com.mmsl.fiwmoney.domain.ports.IFetch;
 import com.mmsl.fiwmoney.domain.ports.IWalletRepository;
-import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.StockRequest;
-import com.mmsl.fiwmoney.exception.WalletNotFoundException;
+import com.mmsl.fiwmoney.dto.StockResponse;
+import com.mmsl.fiwmoney.dto.WalletResponse;
 
 import jakarta.transaction.Transactional;
+
 
 
 @Service
@@ -29,12 +28,9 @@ public class WalletService {
     private static final Logger log = LoggerFactory.getLogger(WalletService.class);
     private static final int ONE_HOUR = 3600000;
    
-    @Autowired
     private final IWalletRepository walletRepository;
     
-    @Autowired
     private final IFetch fetch;
-
 
     public WalletService(IWalletRepository walletRepository, IFetch fetch) {
         this.walletRepository = walletRepository;
@@ -69,7 +65,7 @@ public class WalletService {
     }
 
     //@Scheduled(fixedRate=5000)
-    public void sendMessage(Long walletId) {
+    public void notifySendMessage(Long walletId) {
         Optional<Wallet> wallet = walletRepository.findById(walletId);
         Wallet walletOrg = wallet.orElse(null);
 
@@ -95,9 +91,9 @@ public class WalletService {
         wallet.addStock(stock);
         walletRepository.save(wallet);
         
-        StockResponse stockResponse = StockResponse.to(stock);
+        StockResponse stockResponse = StockResponse.fromEntity(stock);
 
-        return new StockResponse(stock.getId(), stock.getCode(), stock.getCurrentPrice(), stock.getAveragePrice(), stock.isNotify());
+        return stockResponse;
     }
 
     @Transactional
@@ -113,8 +109,14 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
-    public Optional<Wallet> getWalletById(Long id) {
-        return walletRepository.findById(id);
+    public Optional<WalletResponse> getWalletById(Long id) {
+
+          return walletRepository.findById(id)
+            .map(wallet -> new WalletResponse(
+                wallet.getId(),
+                wallet.getStocks().stream()
+                    .map(StockResponse::fromEntity)
+                    .toList())); 
     } 
 
     public void removeStockFromWallet(Long walletId, String code) {
@@ -125,6 +127,7 @@ public class WalletService {
                         .filter(stock -> stock.getCode().equals(code))
                         .findFirst()
                         .ifPresent(stock -> wallet.removeStock(stock));
+
 
         walletRepository.save(wallet);
     }

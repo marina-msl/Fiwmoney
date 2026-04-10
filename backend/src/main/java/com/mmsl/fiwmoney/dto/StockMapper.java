@@ -1,17 +1,15 @@
-package com.mmsl.fiwmoney.domain.entities;
+package com.mmsl.fiwmoney.dto;
 
 import java.math.BigDecimal;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Builder
 @Data
-@AllArgsConstructor
-public class Stock {
+public class StockMapper {
 
-     private Long id;
+    private Long id;
     private String code;
     private BigDecimal currentPrice;
     private BigDecimal averagePrice;

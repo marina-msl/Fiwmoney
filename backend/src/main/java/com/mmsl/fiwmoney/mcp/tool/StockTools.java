@@ -1,17 +1,14 @@
 package com.mmsl.fiwmoney.mcp.tool;
 
-import java.util.List;
+import java.util.Optional;
 
-import javax.validation.constraints.NotNull;
-
-import org.checkerframework.checker.index.qual.Positive;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;
 
-import com.mmsl.fiwmoney.domain.entities.Stock;
-import com.mmsl.fiwmoney.domain.entities.Wallet;
-import com.mmsl.fiwmoney.exception.WalletNotFoundException;
-import com.mmsl.fiwmoney.service.WalletService;
+import com.mmsl.fiwmoney.application.service.WalletService;
+import com.mmsl.fiwmoney.dto.WalletResponse;
+
+import jakarta.annotation.Nonnull;
 
 @Service
 public class StockTools {
@@ -26,10 +23,8 @@ public class StockTools {
         name="getWalletById", 
         description="Return wallet details including all stocks for given a wallet ID"
     )
-    public List<Stock> getWallet(@NotNull @Positive Long id) {
-        return walletService.getWalletById(id)
-            .map(Wallet::getStocks)
-            .orElseThrow(() -> new WalletNotFoundException(id));
+    public Optional<WalletResponse> getWallet(@Nonnull Long id) {
+            return walletService.getWalletById(id);
     }
 }
 

@@ -1,4 +1,4 @@
-    package com.mmsl.fiwmoney.service;
+    package com.mmsl.fiwmoney.config;
 
 import java.util.Properties;
 
