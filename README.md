@@ -71,6 +71,9 @@ The `application.properties` file contains properties to control which repositor
 - [ ] Fix O(n²) in `updateStockPrices` — deduplicate stock fetch by code
 - [ ] Fix hardcoded email in `sendMessage` — should use the user's email from DB
 - [ ] Move OpenAI API key to environment variable (currently in application.properties)
+- [ ] WebFlux / WebClient — replace blocking HTTP calls in `FetchImpl` with non-blocking `WebClient`; parallelize stock price fetches in `updateStockPrices` using `Flux`
+- [ ] Thread pool — configure `ThreadPoolTaskExecutor` to process wallets/stocks in parallel inside the scheduled job
+- [ ] Cache — add `@Cacheable` with short TTL on `getStockPrice` to avoid redundant external API calls when multiple wallets hold the same stock
 
 # Load Testing
 
