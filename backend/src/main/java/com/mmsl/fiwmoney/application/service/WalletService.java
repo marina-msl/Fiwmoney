@@ -94,6 +94,8 @@ public class WalletService {
 
         wallet.addStock(stock);
         walletRepository.save(wallet);
+        
+        StockResponse stockResponse = StockResponse.to(stock);
 
         return new StockResponse(stock.getId(), stock.getCode(), stock.getCurrentPrice(), stock.getAveragePrice(), stock.isNotify());
     }
