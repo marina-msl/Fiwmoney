@@ -3,31 +3,20 @@ package com.mmsl.fiwmoney.domain.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mmsl.fiwmoney.dto.StockResponse;
-import com.mmsl.fiwmoney.dto.WalletDTO;
+import lombok.Builder;
+import lombok.Getter;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
+@Getter
+@Builder
 public class Wallet {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "wallet_id")
+    private Long id;
     private List<Stock> stocks = new ArrayList<>();
 
-    public void addStock(Stock stock) {
+    public Stock addStock(Stock stock) {
         this.stocks.add(stock);
+        return stock;
     }
 
     public void removeStock(Stock stock) {
@@ -41,23 +30,4 @@ public class Wallet {
     public List <Stock> getStocks() {
         return new ArrayList<>(this.stocks);
     }
-    
-    public WalletDTO toDTO() {
-        List<StockResponse> stockDtos = new ArrayList<>();
-
-        for (Stock stock : this.stocks) {
-            StockResponse dto = new StockResponse(
-                stock.getId(),
-                stock.getCode(),
-                stock.getCurrentPrice(),
-                stock.getAveragePrice(),
-                stock.isNotify()
-        );
-        stockDtos.add(dto);
-    }
-
-        return new WalletDTO(this.id, stockDtos);
-    }
-
-
 }
