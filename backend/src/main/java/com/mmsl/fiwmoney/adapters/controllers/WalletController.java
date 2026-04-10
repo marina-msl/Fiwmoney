@@ -50,7 +50,7 @@ public class WalletController {
     public ResponseEntity<String> updateNotify(@PathVariable Long walletId,
                                            @PathVariable String code,
                                            @RequestBody StockRequest stock) {
-        this.walletService.updateNotify(walletId, code, stock.isNotify());
+        this.walletService.updateNotify(walletId, code, stock.notifyEnabled());
 
         return ResponseEntity.ok("Notify status updated for: " + code);
     }
