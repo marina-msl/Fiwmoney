@@ -10,7 +10,7 @@ import lombok.Data;
 public class WalletDTO {
     
     private Long id;
-    private List<StockDTO> stocks;
+    private List<StockResponse> stocks;
  
 
 }
