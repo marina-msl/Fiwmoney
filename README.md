@@ -38,17 +38,21 @@ The `application.properties` file contains properties to control which repositor
 
 
 ### Next steps - some ideas, or not:
-- [ ] Before thinking about authentication, I'm going to focus on CI/CD:
-    - Set up with git actions
-    - Implement some tests
-    - Handle deployment
-    - - [ ] Deploy with docker in AWS or GCP?
-    - - [ ] Unity tests?
 - [ ] change to Mongo DB?
 - [ ] Fix email sending — currently not working
 - [ ] Implement backend endpoints for user profile update (frontend already done)
 - [ ] Improve current price editing on the frontend
 - [ ] Implement OTP (One-Time Password) authentication
+- [ ] Unity tests
+- [ ] Deploy on Cloud Run
+
+#### TODO (technical debt):
+- [ ] Fix O(n²) in `updateStockPrices` — deduplicate stock fetch by code
+- [ ] Fix hardcoded email in `sendMessage` — should use the user's email from DB
+- [ ] Move OpenAI API key to environment variable (currently in application.properties)
+- [ ] WebFlux / WebClient — replace blocking HTTP calls in `FetchImpl` with non-blocking `WebClient`; parallelize stock price fetches in `updateStockPrices` using `Flux`
+- [ ] Thread pool — configure `ThreadPoolTaskExecutor` to process wallets/stocks in parallel inside the scheduled job
+- [ ] Cache — add `@Cacheable` with short TTL on `getStockPrice` to avoid redundant external API calls when multiple wallets hold the same stock
 
 #### Done:
 
@@ -66,14 +70,7 @@ The `application.properties` file contains properties to control which repositor
 - [X] Spring security and JWT
     - [X] Implement REST Controller to Login
     - [X] Frontend is already sending the headers
-
-#### TODO (technical debt):
-- [ ] Fix O(n²) in `updateStockPrices` — deduplicate stock fetch by code
-- [ ] Fix hardcoded email in `sendMessage` — should use the user's email from DB
-- [ ] Move OpenAI API key to environment variable (currently in application.properties)
-- [ ] WebFlux / WebClient — replace blocking HTTP calls in `FetchImpl` with non-blocking `WebClient`; parallelize stock price fetches in `updateStockPrices` using `Flux`
-- [ ] Thread pool — configure `ThreadPoolTaskExecutor` to process wallets/stocks in parallel inside the scheduled job
-- [ ] Cache — add `@Cacheable` with short TTL on `getStockPrice` to avoid redundant external API calls when multiple wallets hold the same stock
+- [X] Set up CI/CD with GitHub Actions
 
 # Load Testing
 
