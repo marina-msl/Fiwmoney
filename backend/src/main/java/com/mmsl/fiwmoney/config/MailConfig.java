@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Bean;
     @Configuration
     public class MailConfig {
 
-        @Value("${spring.mail.host}")
-        private String host;
-        @Value("${spring.mail.username}")
-        private String username;
-        @Value("${spring.mail.password}")
-        private String password;
-        @Value("${spring.mail.port}")
-        private int port;
+        // @Value("${spring.mail.host}")
+        // private String host;
+        // @Value("${spring.mail.username}")
+        // private String username;
+        // @Value("${spring.mail.password}")
+        // private String password;
+        // @Value("${spring.mail.port}")
+        // private int port;
 
         @Bean
         JavaMailSender mailSender() {
