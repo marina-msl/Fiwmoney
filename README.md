@@ -44,7 +44,6 @@ The `application.properties` file contains properties to control which repositor
 - [ ] Improve current price editing on the frontend
 - [ ] Implement OTP (One-Time Password) authentication
 - [ ] Unity tests
-- [ ] Deploy on Cloud Run
 
 #### TODO (technical debt):
 - [ ] Fix O(n²) in `updateStockPrices` — deduplicate stock fetch by code
@@ -71,6 +70,7 @@ The `application.properties` file contains properties to control which repositor
     - [X] Implement REST Controller to Login
     - [X] Frontend is already sending the headers
 - [X] Set up CI/CD with GitHub Actions
+- [X] Deploy on Cloud Run
 
 # Load Testing
 
