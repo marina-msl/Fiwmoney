@@ -14,8 +14,7 @@ import com.mmsl.fiwmoney.domain.ports.IUserRepository;
 @ConditionalOnProperty(name = "user.repository", havingValue = "jpa")
 public class UserRepositoryImpl implements IUserRepository {
 
-    @Autowired
-    private UserJPARepository userJPARepository;
+    private final UserJPARepository userJPARepository;
 
     public UserRepositoryImpl(UserJPARepository userJPARepository) {
         this.userJPARepository = userJPARepository;

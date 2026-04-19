@@ -2,13 +2,13 @@ package com.mmsl.fiwmoney.application.service;
 
 import com.mmsl.fiwmoney.domain.ports.IUserRepository;
 
-public class WalletByUsernameService {
+public class WalletOwnershipService {
 
 
     private IUserRepository userRepository;
 
 
-    public WalletByUsernameService(IUserRepository userRepository) {
+    public WalletOwnershipService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

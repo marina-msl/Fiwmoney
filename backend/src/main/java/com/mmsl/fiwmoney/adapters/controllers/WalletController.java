@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mmsl.fiwmoney.application.service.UserService;
-import com.mmsl.fiwmoney.application.service.WalletByUsernameService;
+import com.mmsl.fiwmoney.application.service.WalletOwnershipService;
 import com.mmsl.fiwmoney.application.service.WalletService;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResponse;
@@ -26,11 +26,11 @@ public class WalletController {
 
     private final WalletService walletService;
     private final UserService userService;
-    private final WalletByUsernameService walletByUsernameService;
+    private final WalletOwnershipService walletByUsernameService;
 
 
     public WalletController(WalletService walletService, UserService userService,
-                            WalletByUsernameService walletByUsernameService) {
+                            WalletOwnershipService walletByUsernameService) {
         this.walletService = walletService;
         this.userService = userService;
         this.walletByUsernameService = walletByUsernameService;
