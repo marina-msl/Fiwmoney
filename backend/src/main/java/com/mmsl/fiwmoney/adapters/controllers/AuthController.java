@@ -19,7 +19,7 @@ import com.mmsl.fiwmoney.dto.UserRequest;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -28,23 +28,20 @@ public class AuthController {
         this.userService = userService;
     }
 
-    // @PostMapping("/register")
-    // public ResponseEntity<AuthResponse> register(@RequestBody UserRequest request) {
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@RequestBody UserRequest request) {
 
-    //    var registeredUser = userService.registerUser(request.username(), request.password(),
-    //             request.name(), request.email());
-        
-    //     if (registeredUser.isEmpty()) {
-    //         return ResponseEntity.status(HttpStatus.CONFLICT)
-    //                 .body(Map.of("error", "Username already exists"));
-    //     }
+        var registeredUser = userService.registerUser(request.username(), request.password(),
+                request.name(), request.email());
 
-    //     String token = jwtUtil.generateToken(request.username());
+        if ((registeredUser).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
 
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token,
-    //                                     registeredUser.get().getWallet().getId(),
-    //                                     registeredUser.get().getUsername()));
-    // }
+        String token = jwtUtil.generateToken(request.username());
+
+        return ResponseEntity.status(HttpStatus.CREATED).header("Authorization", "Bearer " + token).build();
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserRequest user) { 
