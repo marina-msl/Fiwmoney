@@ -17,6 +17,10 @@ public class UserRepositoryImpl implements IUserRepository {
     @Autowired
     private UserJPARepository userJPARepository;
 
+    public UserRepositoryImpl(UserJPARepository userJPARepository) {
+        this.userJPARepository = userJPARepository;
+    }
+
     @Override
     public void save(User user) {
         UserJPAEntity userJPAEntity = new UserJPAEntity(user.getId(),
@@ -33,5 +37,10 @@ public class UserRepositoryImpl implements IUserRepository {
         return userJPARepository.findByUsername(username)
             .map(e -> new User(e.getId(), e.getUsername(), e.getPassword(), e.getName(), e.getEmail(),
                 e.getWallet().toEntity(e.getWallet())));
+    }
+
+    @Override
+    public Long findWalletByUsername(String username) {
+        return userJPARepository.findWalletByUsername(username);
     }
 }

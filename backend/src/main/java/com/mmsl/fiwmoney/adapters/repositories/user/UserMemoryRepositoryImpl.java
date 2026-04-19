@@ -27,4 +27,13 @@ public class UserMemoryRepositoryImpl implements IUserRepository {
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst();
     }
+
+    @Override
+    public Long findWalletByUsername(String username) {
+        return users.stream()
+                .filter(user -> user.getUsername().equals(username))
+                .findFirst()
+                .map(user -> user.getWallet().getId())
+                .orElse(null);
+    }
 }

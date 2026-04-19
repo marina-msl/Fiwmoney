@@ -11,4 +11,6 @@ public interface UserJPARepository extends JpaRepository <UserJPAEntity, Long> {
 
     Optional<UserJPAEntity> findByUsername(String username);
 
+    Long findWalletByUsername(String username);
+
 }

@@ -1,7 +1,7 @@
 package com.mmsl.fiwmoney.adapters.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -11,17 +11,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmsl.fiwmoney.application.service.UserService;
+import com.mmsl.fiwmoney.application.service.WalletByUsernameService;
 import com.mmsl.fiwmoney.application.service.WalletService;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.WalletResponse;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping(value = "/")
 public class WalletController {
 
-    @Autowired
-    private WalletService walletService;
+    private final WalletService walletService;
+    private final UserService userService;
+    private final WalletByUsernameService walletByUsernameService;
+
+
+    public WalletController(WalletService walletService, UserService userService,
+                            WalletByUsernameService walletByUsernameService) {
+        this.walletService = walletService;
+        this.userService = userService;
+        this.walletByUsernameService = walletByUsernameService;
+    }
 
     @PostMapping(value = "/wallet/{walletId}/stock")
     public ResponseEntity<StockResponse> addStockToWallet(@PathVariable Long walletId,
@@ -40,6 +53,10 @@ public class WalletController {
 
     @GetMapping(value = "/wallet/{id}")
     public ResponseEntity<WalletResponse> getWallet(@PathVariable Long id) {
+
+        if(!isUserAllowed(id)) {
+            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).build();
+        }
 
         return this.walletService.getWalletById(id)
                 .map(walletResponse -> ResponseEntity.ok(walletResponse))
@@ -60,5 +77,24 @@ public class WalletController {
                                              @PathVariable ("code") String code) {
         this.walletService.removeStockFromWallet(walletId, code);
         return ResponseEntity.ok("Stock removed from wallet");
+    }
+
+    private Boolean isUserAllowed(long walletId) {
+
+        boolean result = true;
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+         if (!userService.findByUsername(username).isPresent()) {
+             result = false;
+        }
+
+        long walletIdFound = walletByUsernameService.getWalletByUser(username);
+
+        if (walletId != walletIdFound) {
+            result = false;
+        }
+
+        return result;
     }
 }

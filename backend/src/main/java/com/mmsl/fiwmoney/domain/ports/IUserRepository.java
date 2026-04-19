@@ -9,5 +9,7 @@ public interface IUserRepository {
     void save(User user);
     
     Optional<User> findByUsername(String username);
+
+    Long findWalletByUsername(String username);
     
 }
