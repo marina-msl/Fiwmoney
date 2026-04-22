@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.mmsl.fiwmoney.domain.ports.IFetch;
+import com.mmsl.fiwmoney.domain.ports.Fetch;
 import com.mmsl.fiwmoney.dto.StockResultMin;
 
 @Component
-public class FetchImpl implements IFetch {
+public class FetchImpl implements Fetch {
 
    
     @Value("${stock.api.url}")

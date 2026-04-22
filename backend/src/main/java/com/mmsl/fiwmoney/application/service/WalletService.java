@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
 import com.mmsl.fiwmoney.domain.exception.WalletNotFoundException;
-import com.mmsl.fiwmoney.domain.ports.IFetch;
-import com.mmsl.fiwmoney.domain.ports.IWalletRepository;
+import com.mmsl.fiwmoney.domain.ports.Fetch;
+import com.mmsl.fiwmoney.domain.ports.WalletRepository;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.WalletResponse;
@@ -28,11 +28,11 @@ public class WalletService {
     private static final Logger log = LoggerFactory.getLogger(WalletService.class);
     private static final int ONE_HOUR = 3600000;
    
-    private final IWalletRepository walletRepository;
+    private final WalletRepository walletRepository;
     
-    private final IFetch fetch;
+    private final Fetch fetch;
 
-    public WalletService(IWalletRepository walletRepository, IFetch fetch) {
+    public WalletService(WalletRepository walletRepository, Fetch fetch) {
         this.walletRepository = walletRepository;
         this.fetch = fetch;
     }

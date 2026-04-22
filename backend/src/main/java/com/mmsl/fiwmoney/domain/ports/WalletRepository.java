@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.mmsl.fiwmoney.domain.entities.Wallet;
 
-public interface IWalletRepository {
+public interface WalletRepository {
 
    List<Wallet> findAll();
 

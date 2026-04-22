@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.mmsl.fiwmoney.domain.entities.User;
 
-public interface IUserRepository {
+public interface UserRepository {
 
     void save(User user);
     

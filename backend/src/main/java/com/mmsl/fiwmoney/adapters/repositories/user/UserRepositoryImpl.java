@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.mmsl.fiwmoney.adapters.repositories.wallet.WalletJPAEntity;
 import com.mmsl.fiwmoney.domain.entities.User;
-import com.mmsl.fiwmoney.domain.ports.IUserRepository;
+import com.mmsl.fiwmoney.domain.ports.UserRepository;
 
 @Repository
 @ConditionalOnProperty(name = "user.repository", havingValue = "jpa")
-public class UserRepositoryImpl implements IUserRepository {
+public class UserRepositoryImpl implements UserRepository {
 
     private final UserJPARepository userJPARepository;
 

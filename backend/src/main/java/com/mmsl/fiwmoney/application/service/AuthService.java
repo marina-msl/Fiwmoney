@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.mmsl.fiwmoney.adapters.security.JwtUtil;
 import com.mmsl.fiwmoney.domain.entities.User;
-import com.mmsl.fiwmoney.domain.ports.IUserRepository;
+import com.mmsl.fiwmoney.domain.ports.UserRepository;
 
 @Service
 public class AuthService {
 
     private AuthenticationManager authenticationManager;
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
     private JwtUtil jwtUtil;
 
-    public AuthService(AuthenticationManager authenticationManager, IUserRepository userRepository, JwtUtil jwtUtil) {
+    public AuthService(AuthenticationManager authenticationManager, UserRepository userRepository, JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;

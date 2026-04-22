@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import com.mmsl.fiwmoney.domain.entities.Wallet;
-import com.mmsl.fiwmoney.domain.ports.IWalletRepository;
+import com.mmsl.fiwmoney.domain.ports.WalletRepository;
 
 @Repository
 @ConditionalOnProperty(name = "wallet.repository", havingValue = "memory")
-public class WalletMemoryRepositoryImpl implements IWalletRepository {
+public class WalletMemoryRepositoryImpl implements WalletRepository {
 
     private final List<Wallet> wallets = new ArrayList<>();
 

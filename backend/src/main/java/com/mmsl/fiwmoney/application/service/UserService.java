@@ -2,22 +2,21 @@ package com.mmsl.fiwmoney.application.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mmsl.fiwmoney.domain.entities.User;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
-import com.mmsl.fiwmoney.domain.ports.IUserRepository;
+import com.mmsl.fiwmoney.domain.ports.UserRepository;
 
 @Service
 public class UserService {
     
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(IUserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
