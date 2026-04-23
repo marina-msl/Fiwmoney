@@ -1,0 +1,154 @@
+{
+  "info": {
+    "_postman_id": "66294537-69a9-4e3e-a6ce-fa526b6ae8e3",
+    "name": "Fiwmoney",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "21538002"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var token = pm.response.headers.get(\"Authorization\");\r",
+                  "if (token) {\r",
+                  "    pm.environment.set(\"token\", token.replace(\"Bearer\", \"\"));\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"your_username\",\r\n    \"password\": \"your_password\",\r\n    \"name\": \"Your Name\",\r\n    \"email\": \"your@email.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://www.localhost:8080/auth/register",
+              "protocol": "http",
+              "host": [
+                "www",
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();\r",
+                  "pm.environment.set(\"token\", jsonData.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"your_username\",\r\n    \"password\": \"your_password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://www.localhost:8080/auth/login",
+              "protocol": "http",
+              "host": [
+                "www",
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GET Wallet/{id}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://www.localhost:8080/api/v1/wallet/{id}",
+          "protocol": "http",
+          "host": [
+            "www",
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "wallet",
+            "{id}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
