@@ -11,7 +11,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Stock {
 
-     private Long id;
+    private Long id;
     private String code;
     private BigDecimal currentPrice;
     private BigDecimal averagePrice;

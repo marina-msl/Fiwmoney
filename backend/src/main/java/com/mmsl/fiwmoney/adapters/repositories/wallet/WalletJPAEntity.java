@@ -2,6 +2,7 @@ package com.mmsl.fiwmoney.adapters.repositories.wallet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.mmsl.fiwmoney.adapters.repositories.stock.StockJPAEntity;
 import com.mmsl.fiwmoney.domain.entities.Stock;
@@ -52,13 +53,13 @@ public class WalletJPAEntity {
     private static List<StockJPAEntity> toStockMappers(List<Stock> stocks) {
         return stocks.stream()
                 .map(stock -> new StockJPAEntity(stock.getId(), stock.getCode(), stock.getCurrentPrice(), stock.getAveragePrice(), stock.isNotify()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private List<Stock> toStockEntity(List<StockJPAEntity> stockMappers) {
         return stockMappers.stream()
                 .map(stockerMapper -> new Stock(stockerMapper.getId(), stockerMapper.getCode(), stockerMapper.getCurrentPrice(), stockerMapper.getAveragePrice(), stockerMapper.isNotify()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static WalletJPAEntity fromEntity(Wallet wallet) {
