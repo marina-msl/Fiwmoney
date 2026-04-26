@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.adapters.security;
+package com.mmsl.fiwmoney.adapters.in.security;
 
 import java.util.Base64;
 import java.util.Date;

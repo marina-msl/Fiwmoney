@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.adapters.controllers;
+package com.mmsl.fiwmoney.adapters.in.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,7 @@ import com.mmsl.fiwmoney.dto.WalletResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/api/v1")
 public class WalletController {
 
     private final WalletService walletService;

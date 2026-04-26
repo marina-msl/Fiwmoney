@@ -1,4 +1,4 @@
-package com.mmsl.fiwmoney.adapters.controllers;
+package com.mmsl.fiwmoney.adapters.in.controllers;
 
 import org.springframework.ai.chat.client.ChatClient;
 

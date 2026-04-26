@@ -23,8 +23,8 @@ import com.mmsl.fiwmoney.application.service.WalletService;
 import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
 import com.mmsl.fiwmoney.domain.exception.WalletNotFoundException;
-import com.mmsl.fiwmoney.domain.ports.IFetch;
-import com.mmsl.fiwmoney.domain.ports.IWalletRepository;
+import com.mmsl.fiwmoney.domain.ports.Fetch;
+import com.mmsl.fiwmoney.domain.ports.WalletRepository;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResponse;
 
@@ -32,10 +32,10 @@ import com.mmsl.fiwmoney.dto.StockResponse;
 class WalletServiceTest {
 
     @Mock
-    private IWalletRepository walletRepository;
+    private WalletRepository walletRepository;
 
     @Mock
-    private IFetch fetch;
+    private Fetch fetch;
 
     @InjectMocks
     private WalletService walletService;

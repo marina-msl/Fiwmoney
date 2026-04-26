@@ -1,8 +1,7 @@
-package com.mmsl.fiwmoney.adapters.controllers;
+package com.mmsl.fiwmoney.adapters.in.controllers;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mmsl.fiwmoney.adapters.security.JwtUtil;
+import com.mmsl.fiwmoney.adapters.in.security.JwtUtil;
 import com.mmsl.fiwmoney.application.service.UserService;
 import com.mmsl.fiwmoney.dto.AuthResponse;
 import com.mmsl.fiwmoney.dto.UserRequest;
@@ -21,11 +20,11 @@ public class AuthController {
 
     private final UserService userService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/register")

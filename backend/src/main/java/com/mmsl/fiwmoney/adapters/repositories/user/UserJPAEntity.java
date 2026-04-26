@@ -1,7 +1,6 @@
 package com.mmsl.fiwmoney.adapters.repositories.user;
 
 import com.mmsl.fiwmoney.adapters.repositories.wallet.WalletJPAEntity;
-import com.mmsl.fiwmoney.domain.entities.Wallet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
