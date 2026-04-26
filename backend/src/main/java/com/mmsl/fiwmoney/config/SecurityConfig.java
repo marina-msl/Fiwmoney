@@ -35,7 +35,7 @@ public class SecurityConfig {
         http.csrf(r -> r.disable())
             .authorizeHttpRequests(auth -> auth
                 .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                .requestMatchers("/auth/**", "/actuator/health", "/sse").permitAll()
+                .requestMatchers("/auth/**", "/actuator/health", "/sse", "/mcp/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(r -> r.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
