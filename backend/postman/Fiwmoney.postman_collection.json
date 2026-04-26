@@ -33,7 +33,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{token}}",
+                  "value": "",
                   "type": "string"
                 }
               ]
@@ -48,7 +48,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"your_username\",\r\n    \"password\": \"your_password\",\r\n    \"name\": \"Your Name\",\r\n    \"email\": \"your@email.com\"\r\n}",
+              "raw": "{\r\n    \"username\": \"marinamsl\",\r\n    \"password\": \"blablabla\",\r\n    \"name\": \"Marina Marques Silva Leide\",\r\n    \"email\": \"marina.msleide@gmail.com\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -92,7 +92,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"your_username\",\r\n    \"password\": \"your_password\"\r\n}",
+              "raw": "{\r\n    \"username\": \"marinamsl\",\r\n    \"password\": \"blablabla\",\r\n    \"name\": \"Marina Marques Silva Leide\",\r\n    \"email\": \"marina.msleide@gmail.com\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -100,7 +100,7 @@
               }
             },
             "url": {
-              "raw": "http://www.localhost:8080/auth/login",
+              "raw": "http://www.localhost:8080/auth/register",
               "protocol": "http",
               "host": [
                 "www",
@@ -109,7 +109,7 @@
               "port": "8080",
               "path": [
                 "auth",
-                "login"
+                "register"
               ]
             }
           },
@@ -118,37 +118,174 @@
       ]
     },
     {
-      "name": "GET Wallet/{id}",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{token}}",
-              "type": "string"
+      "name": "wallet",
+      "item": [
+        {
+          "name": "getWallet",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://www.localhost:8080/api/v1/wallet/{id}",
+              "protocol": "http",
+              "host": [
+                "www",
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "wallet",
+                "{id}"
+              ]
             }
-          ]
+          },
+          "response": []
         },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://www.localhost:8080/api/v1/wallet/{id}",
-          "protocol": "http",
-          "host": [
-            "www",
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "v1",
-            "wallet",
-            "{id}"
-          ]
+        {
+          "name": "addStockToWallet",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"ITSA4\",\r\n    \"averagePrice\": \"11.50\",\r\n    \"notifyEnabled\": false   \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://www.localhost:8080/api/v1/wallet/1/stock",
+              "protocol": "http",
+              "host": [
+                "www",
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "wallet",
+                "1",
+                "stock"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateNotify",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"PETR4\",\r\n    \"averagePrice\": \"11.50\",\r\n    \"notifyEnabled\": true   \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://www.localhost:8080/api/v1/wallet/{walletId}/stock/{code}/notify",
+              "protocol": "http",
+              "host": [
+                "www",
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "wallet",
+                "{walletId}",
+                "stock",
+                "{code}",
+                "notify"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "removeStock",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://www.localhost:8080/api/v1/wallet/{id}/stock/",
+              "protocol": "http",
+              "host": [
+                "www",
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "wallet",
+                "{id}",
+                "stock",
+                ""
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     }
   ]
 }
