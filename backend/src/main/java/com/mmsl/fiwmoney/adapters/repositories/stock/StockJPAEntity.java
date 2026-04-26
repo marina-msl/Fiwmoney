@@ -11,11 +11,13 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "stock", uniqueConstraints = @UniqueConstraint(columnNames = {"wallet_id", "code"}))
 public class StockJPAEntity {
 

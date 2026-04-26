@@ -16,7 +16,7 @@ public class Wallet {
 
 
     private Long id;
-    private List<Stock> stocks;
+    private List<Stock> stocks = new ArrayList<>();
 
     public Stock addStock(Stock stock) {
         this.stocks.add(stock);

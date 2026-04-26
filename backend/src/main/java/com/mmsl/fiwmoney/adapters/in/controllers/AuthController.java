@@ -39,7 +39,8 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(request.username());
 
-        return ResponseEntity.status(HttpStatus.CREATED).header("Authorization", "Bearer " + token).build();
+        return ResponseEntity.status(HttpStatus.CREATED).header("Authorization", 
+                                                                "Bearer " + token).build();
     }
 
     @PostMapping("/login")
