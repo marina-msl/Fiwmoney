@@ -7,11 +7,13 @@ services:
      - "8080:8080"
     depends_on:
      - postgres
+     - redis
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fiwmoney_db
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATA_REDIS_HOST: redis
     networks:
     - mynetwork
 
@@ -29,9 +31,20 @@ services:
     networks:
       - mynetwork
 
+  redis:
+    image: redis:7
+    container_name: fiwmoney_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
 
 volumes:
   pgdata:
+  redis_data:
   
