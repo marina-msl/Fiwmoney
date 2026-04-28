@@ -92,7 +92,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"marinamsl\",\r\n    \"password\": \"blablabla\",\r\n    \"name\": \"Marina Marques Silva Leide\",\r\n    \"email\": \"marina.msleide@gmail.com\"\r\n}",
+              "raw": "{\r\n    \"username\": \"nickdev\",\r\n    \"password\": \"blablabla\",\r\n    \"name\": \"Niklas Grieger\",\r\n    \"email\": \"devnik@gmail.com\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -100,7 +100,7 @@
               }
             },
             "url": {
-              "raw": "http://www.localhost:8080/auth/register",
+              "raw": "http://www.localhost:8080/auth/login",
               "protocol": "http",
               "host": [
                 "www",
@@ -109,7 +109,7 @@
               "port": "8080",
               "path": [
                 "auth",
-                "register"
+                "login"
               ]
             }
           },
@@ -136,7 +136,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://www.localhost:8080/api/v1/wallet/{id}",
+              "raw": "http://www.localhost:8080/api/v1/wallet",
               "protocol": "http",
               "host": [
                 "www",
@@ -146,8 +146,7 @@
               "path": [
                 "api",
                 "v1",
-                "wallet",
-                "{id}"
+                "wallet"
               ]
             }
           },
@@ -170,7 +169,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"code\": \"ITSA4\",\r\n    \"averagePrice\": \"11.50\",\r\n    \"notifyEnabled\": false   \r\n}",
+              "raw": "{\r\n    \"code\": \"ELET3\",\r\n    \"averagePrice\": \"11.50\",\r\n    \"notifyEnabled\": false   \r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -178,7 +177,7 @@
               }
             },
             "url": {
-              "raw": "http://www.localhost:8080/api/v1/wallet/1/stock",
+              "raw": "http://www.localhost:8080/api/v1/wallet/stock",
               "protocol": "http",
               "host": [
                 "www",
@@ -189,7 +188,6 @@
                 "api",
                 "v1",
                 "wallet",
-                "1",
                 "stock"
               ]
             }
@@ -256,17 +254,8 @@
             },
             "method": "DELETE",
             "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
             "url": {
-              "raw": "http://www.localhost:8080/api/v1/wallet/{id}/stock/",
+              "raw": "http://www.localhost:8080/api/v1/wallet/stock/ELET3",
               "protocol": "http",
               "host": [
                 "www",
@@ -277,9 +266,8 @@
                 "api",
                 "v1",
                 "wallet",
-                "{id}",
                 "stock",
-                ""
+                "ELET3"
               ]
             }
           },

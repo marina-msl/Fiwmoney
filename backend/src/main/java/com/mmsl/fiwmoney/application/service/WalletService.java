@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
+import com.mmsl.fiwmoney.adapters.in.exception.APIUnavailableException;
 import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
 import com.mmsl.fiwmoney.domain.exception.WalletNotFoundException;
@@ -51,8 +53,15 @@ public class WalletService {
         //TODO MELHORAR ESSA PARTE QUE ESTA O(n)^2
         for (Wallet wallet : wallets) {
             for (Stock stock : wallet.getStocks()) {
-                BigDecimal currentPrice = this.fetch.getStockPrice(stock.getCode());
 
+                BigDecimal currentPrice;    
+
+                try {
+                    currentPrice = this.fetch.getStockPrice(stock.getCode());
+                } catch (ResourceAccessException e) {
+                    throw new APIUnavailableException("Stock price service is currently unavailable. Please try again later.");
+                }    
+                
                 if (currentPrice.compareTo(BigDecimal.valueOf(-1)) != 0) {
                     stock.setCurrentPrice(currentPrice);
                     log.info("Updating price for: " + stock.getCode());

@@ -36,65 +36,85 @@ public class WalletController {
         this.walletByUsernameService = walletByUsernameService;
     }
 
-    @PostMapping(value = "/wallet/{walletId}/stock")
-    public ResponseEntity<StockResponse> addStockToWallet(@PathVariable Long walletId,
-                                                     @RequestBody StockRequest stock) {
+    @PostMapping(value = "/wallet/stock")
+    public ResponseEntity<StockResponse> addStockToWallet(@RequestBody StockRequest stock) {
+
+         if(!isUserAllowed()) {
+            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).build();
+        }
 
         if (stock.code() == null) {
             return ResponseEntity.badRequest().build();
         }
 
-       StockResponse stockDTO = this.walletService.addStockToWallet(walletId, stock);
+       StockResponse stockDTO = this.walletService.addStockToWallet(getWalletId(), stock);
 
        return ResponseEntity.ok()
             .header("X-Custom-Info", "Stock Data Response")
             .body(stockDTO);
     }
 
-    @GetMapping(value = "/wallet/{id}")
-    public ResponseEntity<WalletResponse> getWallet(@PathVariable Long id) {
+    @GetMapping(value = "/wallet")
+    public ResponseEntity<WalletResponse> getWallet() {
 
-        if(!isUserAllowed(id)) {
+        if(!isUserAllowed()) {
             return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).build();
         }
 
-        return this.walletService.getWalletById(id)
+        long walletId = getWalletId();
+
+        return this.walletService.getWalletById(walletId)
                 .map(walletResponse -> ResponseEntity.ok(walletResponse))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/wallet/{walletId}/stock/{code}/notify")
-    public ResponseEntity<String> updateNotify(@PathVariable Long walletId,
-                                           @PathVariable String code,
+    @PatchMapping("/wallet/stock/{code}/notify")
+    public ResponseEntity<String> updateNotify(@PathVariable String code,
                                            @RequestBody StockRequest stock) {
+
+        if(!isUserAllowed()) {
+            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).build();
+        }
+
+        long walletId = getWalletId();
+
         this.walletService.updateNotify(walletId, code, stock.notifyEnabled());
 
         return ResponseEntity.ok("Notify status updated for: " + code);
     }
 
-    @DeleteMapping("/wallet/{id}/stock/{code}")
-    public ResponseEntity<String> removeStock(@PathVariable ("id") Long walletId,
-                                             @PathVariable ("code") String code) {
+    @DeleteMapping("/wallet/stock/{code}")
+    public ResponseEntity<String> removeStock(@PathVariable String code) {
+
+        if(!isUserAllowed()) {
+            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).build();
+        }
+
+        long walletId = getWalletId();
+        
         this.walletService.removeStockFromWallet(walletId, code);
+
         return ResponseEntity.ok("Stock removed from wallet");
     }
 
-    private Boolean isUserAllowed(long walletId) {
+     private Boolean isUserAllowed() {
 
-        boolean result = true;
+        boolean result = false;
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-         if (!userService.findByUsername(username).isPresent()) {
-             result = false;
-        }
-
-        long walletIdFound = walletByUsernameService.getWalletByUser(username);
-
-        if (walletId != walletIdFound) {
-            result = false;
+         if (userService.findByUsername(username).isPresent()) {
+             result = true;
         }
 
         return result;
+    }
+
+    private long getWalletId() {
+        return walletByUsernameService.getWalletByUser(getUsername());
+    }
+
+    private String getUsername() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
