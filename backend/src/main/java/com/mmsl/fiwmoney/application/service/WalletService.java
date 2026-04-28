@@ -122,7 +122,6 @@ public class WalletService {
 
           return walletRepository.findById(id)
             .map(wallet -> new WalletResponse(
-                wallet.getId(),
                 wallet.getStocks().stream()
                     .map(StockResponse::fromEntity)
                     .toList())); 
