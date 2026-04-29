@@ -8,11 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
-import com.mmsl.fiwmoney.adapters.in.exception.APIUnavailableException;
 import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
+import com.mmsl.fiwmoney.domain.exception.StockNotFoundException;
 import com.mmsl.fiwmoney.domain.exception.WalletNotFoundException;
 import com.mmsl.fiwmoney.domain.ports.Fetch;
 import com.mmsl.fiwmoney.domain.ports.WalletRepository;
@@ -21,8 +20,6 @@ import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.WalletResponse;
 
 import jakarta.transaction.Transactional;
-
-
 
 @Service
 public class WalletService {
@@ -54,13 +51,7 @@ public class WalletService {
         for (Wallet wallet : wallets) {
             for (Stock stock : wallet.getStocks()) {
 
-                BigDecimal currentPrice;    
-
-                try {
-                    currentPrice = this.fetch.getStockPrice(stock.getCode());
-                } catch (ResourceAccessException e) {
-                    throw new APIUnavailableException("Stock price service is currently unavailable. Please try again later.");
-                }    
+                BigDecimal currentPrice = this.fetch.getStockPrice(stock.getCode());
                 
                 if (currentPrice.compareTo(BigDecimal.valueOf(-1)) != 0) {
                     stock.setCurrentPrice(currentPrice);
@@ -113,7 +104,8 @@ public class WalletService {
         wallet.getStocks().stream()
                         .filter(stock -> stock.getCode().equals(code))
                         .findFirst()
-                        .ifPresent(stock -> stock.setNotify(notify));
+                        .orElseThrow(() -> new StockNotFoundException(code))
+                        .setNotify(notify);
 
         walletRepository.save(wallet);
     }
@@ -130,12 +122,13 @@ public class WalletService {
     public void removeStockFromWallet(Long walletId, String code) {
         Wallet wallet = walletRepository.findById(walletId)
                 .orElseThrow(() -> new WalletNotFoundException(walletId));
-
-        wallet.getStocks().stream()
-                        .filter(stock -> stock.getCode().equals(code))
+                        
+        Stock stock = wallet.getStocks().stream()
+                        .filter(s -> s.getCode().equals(code))
                         .findFirst()
-                        .ifPresent(stock -> wallet.removeStock(stock));
+                        .orElseThrow(() -> new StockNotFoundException(code));
 
+        wallet.removeStock(stock);
 
         walletRepository.save(wallet);
     }
