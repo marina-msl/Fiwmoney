@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mmsl.fiwmoney.application.service.UserService;
 import com.mmsl.fiwmoney.application.service.WalletOwnershipService;
 import com.mmsl.fiwmoney.application.service.WalletService;
+import com.mmsl.fiwmoney.dto.NotifyStockRequest;
 import com.mmsl.fiwmoney.dto.StockRequest;
 import com.mmsl.fiwmoney.dto.StockResponse;
 import com.mmsl.fiwmoney.dto.WalletResponse;
@@ -70,7 +71,7 @@ public class WalletController {
 
     @PatchMapping("/wallet/stock/{code}/notify")
     public ResponseEntity<String> updateNotify(@PathVariable String code,
-                                           @RequestBody StockRequest stock) {
+                                                @RequestBody NotifyStockRequest request) {
 
         if(!isUserAllowed()) {
             return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).build();
@@ -78,7 +79,7 @@ public class WalletController {
 
         long walletId = getWalletId();
 
-        this.walletService.updateNotify(walletId, code, stock.notifyEnabled());
+        this.walletService.updateNotify(walletId, code, request.notifyEnabled());
 
         return ResponseEntity.ok("Notify status updated for: " + code);
     }
