@@ -59,6 +59,6 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(userFound.get().getUsername());
 
-        return ResponseEntity.ok(new AuthResponse(token, userFound.get().getWallet().getId(), userFound.get().getUsername()));
+        return ResponseEntity.ok(new AuthResponse(token, userFound.get().getUsername()));
     }
 }
