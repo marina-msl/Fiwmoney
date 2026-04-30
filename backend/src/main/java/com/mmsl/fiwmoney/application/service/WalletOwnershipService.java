@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.mmsl.fiwmoney.domain.exception.WalletNotFoundException;
 import com.mmsl.fiwmoney.domain.ports.UserRepository;
 
 @Service
@@ -30,6 +31,10 @@ public class WalletOwnershipService {
             }
 
             walletId = userRepository.findWalletByUsername(username);
+
+            if (walletId == null) {
+                throw new WalletNotFoundException();
+            }
 
             redisTemplate.opsForValue().set(username, walletId, Duration.ofDays(1) ); // cache for one day
 

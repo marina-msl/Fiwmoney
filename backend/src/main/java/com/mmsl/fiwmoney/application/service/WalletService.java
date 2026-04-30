@@ -82,7 +82,7 @@ public class WalletService {
 
     public StockResponse addStockToWallet(Long walletId, StockRequest request) {
         Wallet wallet = walletRepository.findById(walletId)
-                .orElseThrow(() -> new WalletNotFoundException(walletId));
+                .orElseThrow(() -> new WalletNotFoundException());
 
         BigDecimal currentPrice = this.fetch.getStockPrice(request.code());
 
@@ -99,7 +99,7 @@ public class WalletService {
     @Transactional
     public void updateNotify(Long walletId, String code, boolean notify) {
         Wallet wallet = walletRepository.findById(walletId)
-                .orElseThrow(()-> new WalletNotFoundException(walletId));
+                .orElseThrow(()-> new WalletNotFoundException());
 
         wallet.getStocks().stream()
                         .filter(stock -> stock.getCode().equals(code))
@@ -121,7 +121,7 @@ public class WalletService {
 
     public void removeStockFromWallet(Long walletId, String code) {
         Wallet wallet = walletRepository.findById(walletId)
-                .orElseThrow(() -> new WalletNotFoundException(walletId));
+                .orElseThrow(() -> new WalletNotFoundException());
                         
         Stock stock = wallet.getStocks().stream()
                         .filter(s -> s.getCode().equals(code))
