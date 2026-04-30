@@ -74,7 +74,7 @@ class WalletServiceTest {
         when(walletRepository.findById(walletId)).thenReturn(Optional.empty());
         //ACT & ASSERT
         WalletNotFoundException exception = assertThrows(WalletNotFoundException.class, () -> walletService.addStockToWallet(walletId, request));
-        assertEquals("Wallet not found with ID: " + walletId, exception.getMessage());
+        assertEquals("Wallet not found", exception.getMessage());
     }
 
  
