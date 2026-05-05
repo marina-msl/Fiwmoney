@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.mmsl.fiwmoney.application.exception.APIStockNotFoundException;
 import com.mmsl.fiwmoney.domain.entities.Stock;
 import com.mmsl.fiwmoney.domain.entities.Wallet;
 import com.mmsl.fiwmoney.domain.exception.StockNotFoundException;
@@ -85,6 +86,10 @@ public class WalletService {
                 .orElseThrow(() -> new WalletNotFoundException());
 
         BigDecimal currentPrice = this.fetch.getStockPrice(request.code());
+
+        if (currentPrice.compareTo(BigDecimal.valueOf(-1)) == 0) {
+            throw new APIStockNotFoundException(request.code());
+        }
 
         Stock stock = request.toEntity(currentPrice);
 

@@ -34,7 +34,7 @@ public class FetchImpl implements Fetch {
 
         try {
             StockResultMin response = restTemplate.getForObject(url, StockResultMin.class);
-            return response != null ? response.getPrice() : BigDecimal.ZERO;
+            return response == null ? BigDecimal.valueOf(-1) : response.getPrice();
         } catch (HttpClientErrorException.NotFound e) {
             return BigDecimal.valueOf(-1);
         } catch (ResourceAccessException e) {
