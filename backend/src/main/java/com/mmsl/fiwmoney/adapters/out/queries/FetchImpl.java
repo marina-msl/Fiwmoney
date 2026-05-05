@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -23,6 +26,10 @@ public class FetchImpl implements Fetch {
    
     @Value("${stock.api.url}")
     private String stockSearchUrl; 
+
+    @Value("${stock.api.key}")
+    private String apiKey;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
@@ -32,8 +39,19 @@ public class FetchImpl implements Fetch {
 
         String url = stockSearchUrl + code;
 
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-API-Key", apiKey);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+
         try {
-            StockResultMin response = restTemplate.getForObject(url, StockResultMin.class);
+            StockResultMin response = restTemplate.exchange(url,
+                                            HttpMethod.GET,
+                                            entity,
+                                            StockResultMin.class)
+                                            .getBody();
+                                            
             return response == null ? BigDecimal.valueOf(-1) : response.getPrice();
         } catch (HttpClientErrorException.NotFound e) {
             return BigDecimal.valueOf(-1);
